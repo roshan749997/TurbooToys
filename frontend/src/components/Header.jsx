@@ -25,33 +25,33 @@ const Header = () => {
       name: 'Cotton', 
       path: '/category/cotton',
       subcategories: [
-  { name: 'Bengali Sarees', path: '/category/cotton/bengali-sarees' },
-  { name: 'Maheshwari Cotton', path: '/category/cotton/maheshwari-cotton' },
-  { name: 'Jaipur Cotton', path: '/category/cotton/jaipur-cotton' },
+  { name: 'Bengali Cotton Sarees', path: '/category/cotton/bengali-sarees' },
+  { name: 'Maheshwari Cotton Sarees', path: '/category/cotton/maheshwari-cotton' },
+  { name: 'Jaipur Cotton Sarees', path: '/category/cotton/jaipur-cotton' },
   { name: 'South Cotton Sarees', path: '/category/cotton/south-cotton-sarees' },
-  { name: 'Office Wear Sarees', path: '/category/cotton/office-wear-sarees' },
-  { name: 'Dr.Khadi', path: '/category/cotton/dr-khadi' },
-  { name: 'Block Printed Sarees', path: '/category/cotton/block-printed-sarees' },
-  { name: 'Bagru Print Sarees', path: '/category/cotton/bagru-print-sarees' },
-  { name: 'Ajrakh Print Sarees', path: '/category/cotton/ajrakh-print-sarees' },
-  { name: 'Ikkat Sarees', path: '/category/cotton/ikkat-sarees' },
+  { name: 'Office Wear Cotton Sarees', path: '/category/cotton/office-wear-sarees' },
+  { name: 'Dr.Khadi Cotton Sarees', path: '/category/cotton/dr-khadi' },
+  { name: 'Block Printed Cotton Sarees', path: '/category/cotton/block-printed-sarees' },
+  { name: 'Bagru Print Cotton Sarees', path: '/category/cotton/bagru-print-sarees' },
+  { name: 'Ajrakh Print Cotton Sarees', path: '/category/cotton/ajrakh-print-sarees' },
+  { name: 'Ikkat Cotton Sarees', path: '/category/cotton/ikkat-sarees' },
   { name: 'Chanderi Cotton Silks', path: '/category/cotton/chanderi-cotton-silks' },
-  { name: 'Kalamkari Sarees', path: '/category/cotton/kalamkari-sarees' },]
+  { name: 'Kalamkari Cotton Sarees', path: '/category/cotton/kalamkari-sarees' },]
 
     },
     {
       name: 'Regional',
       path: '/category/regional',
       subcategories: [
-        { name: 'Sambalpuri Sarees', path: '/category/regional/sambalpuri-sarees' },
-        { name: 'Kanjivaram Sarees', path: '/category/regional/kanjivaram-sarees' },
-        { name: 'Bengali Sarees', path: '/category/regional/bengali-sarees' },
-        { name: 'Mysore Sarees', path: '/category/regional/mysore-sarees' },
-        { name: 'Maheshwari Sarees', path: '/category/regional/maheshwari-sarees' },
-        { name: 'Karnataka Sarees', path: '/category/regional/karnataka-sarees' },
-        { name: 'Tamilnadu Sarees', path: '/category/regional/tamilnadu-sarees' },
-        { name: 'Banarasi Sarees', path: '/category/regional/banarasi-sarees' },
-        { name: 'Banarasi Dupatta', path: '/category/regional/banarasi-dupatta' }
+        { name: 'Sambalpuri Regional Sarees', path: '/category/regional/sambalpuri-sarees' },
+        { name: 'Kanjivaram Regional Sarees', path: '/category/regional/kanjivaram-sarees' },
+        { name: 'Bengali Regional Sarees', path: '/category/regional/bengali-sarees' },
+        { name: 'Mysore Regional Sarees', path: '/category/regional/mysore-sarees' },
+        { name: 'Maheshwari Regional Sarees', path: '/category/regional/maheshwari-sarees' },
+        { name: 'Karnataka Regional Sarees', path: '/category/regional/karnataka-sarees' },
+        { name: 'Tamilnadu Regional Sarees', path: '/category/regional/tamilnadu-sarees' },
+        { name: 'Banarasi Regional Sarees', path: '/category/regional/banarasi-sarees' },
+        { name: 'Banarasi Regional Dupatta', path: '/category/regional/banarasi-dupatta' }
       ]
     },
     { 
