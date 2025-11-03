@@ -46,8 +46,27 @@ export const getProducts = async (req, res) => {
     }
 
     // Execute the query
-    const products = await Product.find(query);
+    let products = await Product.find(query);
     console.log(`Found ${products.length} matching products`);
+
+    // Process image URLs to ensure they're absolute
+    products = products.map(product => {
+      const productObj = product.toObject();
+      if (productObj.images && Array.isArray(productObj.images)) {
+        productObj.images = productObj.images.map(img => {
+          if (img && img.url && !img.url.startsWith('http')) {
+            // If the URL is relative, make it absolute
+            const baseUrl = process.env.BASE_URL || 'http://localhost:5000';
+            return {
+              ...img,
+              url: img.url.startsWith('/') ? `${baseUrl}${img.url}` : `${baseUrl}/${img.url}`
+            };
+          }
+          return img;
+        });
+      }
+      return productObj;
+    });
     
     res.json(products);
   } catch (error) {
@@ -62,13 +81,36 @@ export const getProducts = async (req, res) => {
 
 export const getProductById = async (req, res) => {
   try {
-    const product = await Product.findById(req.params.id);
+    let product = await Product.findById(req.params.id);
     if (!product) {
       return res.status(404).json({ message: 'Product not found' });
     }
-    res.json(product);
+
+    // Convert to plain object to modify
+    const productObj = product.toObject();
+    
+    // Process image URLs to ensure they're absolute
+    if (productObj.images && Array.isArray(productObj.images)) {
+      productObj.images = productObj.images.map(img => {
+        if (img && img.url && !img.url.startsWith('http')) {
+          // If the URL is relative, make it absolute
+          const baseUrl = process.env.BASE_URL || 'http://localhost:5000';
+          return {
+            ...img,
+            url: img.url.startsWith('/') ? `${baseUrl}${img.url}` : `${baseUrl}/${img.url}`
+          };
+        }
+        return img;
+      });
+    }
+    
+    res.json(productObj);
   } catch (error) {
     console.error('Error fetching product:', error);
-    res.status(500).json({ message: 'Error fetching product', error: error.message });
+    res.status(500).json({ 
+      message: 'Error fetching product', 
+      error: error.message,
+      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+    });
   }
 };

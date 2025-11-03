@@ -14,22 +14,28 @@ configDotenv();
 const server = express();
 
 const allowedOrigins = [
-  process.env.FRONTEND_URL || 'http://localhost:5174',
-  'http://localhost:5173' // Add support for port 5173
+  'https://sarees-frontend.onrender.com',
+  'https://sarees-jwhn.onrender.com',
+  'http://localhost:5173',
+  'http://localhost:5174'
 ];
 
-server.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  },
-  credentials: true
-}));
+// CORS configuration
+server.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.header('Access-Control-Allow-Credentials', true);
+  
+  // Handle preflight
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  next();
+});
 server.use(express.json());
 server.use(cookieParser());
 
