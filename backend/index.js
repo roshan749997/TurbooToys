@@ -1,4 +1,4 @@
-import dotenv from 'dotenv';
+import { configDotenv } from 'dotenv';
 import express from 'express'
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
@@ -10,44 +10,29 @@ import addressRoutes from './routes/address.routes.js';
 
 import connectDB from './config/DataBaseConnection.js';
 
-dotenv.config();
+configDotenv();
 
-const app = express();
+const server = express();
 
-app.use(
-  cors({
-    origin: [
-      process.env.FRONTEND_URL || 'http://localhost:5173',
-      'https://sareesansaaar.onrender.com',
-    ],
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-  })
-);
+server.use(cors({
+  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  credentials: true,
+}));
 
-app.use(express.json());
-app.use(cookieParser());
+server.use(express.json());
+server.use(cookieParser());
 
-app.get('/api/health', (req, res) => res.json({ status: 'OK' }));
-app.use('/api/auth', authRoutes);
-app.use('/api/header', headerRoutes);
-app.use('/api/products', productRoutes);
-app.use('/api/cart', cartRoutes);
-app.use('/api/address', addressRoutes);
+server.get('/api/health', (req, res) => res.json({ ok: true }));
+server.use('/api/auth', authRoutes);
+server.use('/api/header', headerRoutes);
+server.use('/api/products', productRoutes);
+server.use('/api/cart', cartRoutes);
+server.use('/api/address', addressRoutes);
 
 const PORT = process.env.PORT || 5000;
 
-const startServer = async () => {
-  try {
-    await connectDB(process.env.MONGODB_URI);
-    app.listen(PORT, () => {
-      console.log(`✅ Server running on port ${PORT}`);
-    });
-  } catch (err) {
-    console.error('❌ Server startup failed:', err.message);
-    process.exit(1);
-  }
-};
+await connectDB(process.env.MONGODB_URI || '');
 
-startServer();
+server.listen(PORT, () => {
+  console.log('Server is running at', PORT);
+});
