@@ -86,6 +86,19 @@ const Header = () => {
         { name: 'GEOMETRIC PRINTED SAREES', path: '/category/printed-sarees/geometric-printed-sarees' }
       ]
     },
+    { 
+      name: 'BLOUSE', 
+      path: '/category/blouse',
+      subcategories: [
+        { name: 'READY TO SHIP', path: '/category/blouse/ready-to-ship' },
+        { name: 'EMBROIDERED BLOUSE', path: '/category/blouse/embroidered-blouse' },
+        { name: 'PLAIN BLOUSE', path: '/category/blouse/plain-blouse' },
+        { name: 'BRIDAL BLOUSE', path: '/category/blouse/bridal-blouse' },
+        { name: 'READYMADE BLOUSE', path: '/category/blouse/readymade-blouse' },
+        { name: 'DESIGNER BLOUSE', path: '/category/blouse/designer-blouse' },
+        { name: 'BLOUSE MATERIAL', path: '/category/blouse/blouse-material' }
+      ]
+    },
   ];
 
   // Close dropdown when clicking outside
@@ -280,7 +293,7 @@ const Header = () => {
             </div>
           )}
           
-          <style jsx>{`
+          <style>{`
             .hide-scrollbar::-webkit-scrollbar {
               display: none;
               height: 0;

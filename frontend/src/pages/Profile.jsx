@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { api } from '../utils/api';
-import { getMyAddress } from '../services/api';
+import { getMyAddress, getMyOrders } from '../services/api';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function FlipkartAccountSettings() {
   const [activeSection, setActiveSection] = useState('profile');
@@ -17,6 +18,10 @@ export default function FlipkartAccountSettings() {
   const [loading, setLoading] = useState(true);
   const [addresses, setAddresses] = useState([]);
   const [loadingAddresses, setLoadingAddresses] = useState(false);
+  const [orders, setOrders] = useState([]);
+  const [loadingOrders, setLoadingOrders] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const fetchUserData = async () => {
     try {
@@ -59,6 +64,29 @@ export default function FlipkartAccountSettings() {
     fetchUserData();
     fetchAddresses();
   }, []);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const tab = params.get('tab');
+    if (tab && ['orders', 'profile', 'addresses'].includes(tab)) {
+      setActiveSection(tab);
+    }
+  }, [location.search]);
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        setLoadingOrders(true);
+        const data = await getMyOrders();
+        setOrders(Array.isArray(data) ? data : []);
+      } catch (e) {
+        setOrders([]);
+      } finally {
+        setLoadingOrders(false);
+      }
+    };
+    if (activeSection === 'orders') load();
+  }, [activeSection]);
 
   const toggleMenu = (menu) => {
     setExpandedMenu(expandedMenu === menu ? null : menu);
@@ -317,7 +345,7 @@ export default function FlipkartAccountSettings() {
                     <div className="p-4 sm:p-6 border-b bg-gradient-to-r from-gray-50 to-gray-100">
                       <h2 className="text-lg sm:text-xl font-bold text-gray-800 flex items-center gap-2">
                         <svg className="w-5 h-5 sm:w-6 sm:h-6 text-[#800020]" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/>
+                          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                         </svg>
                         FAQs
                       </h2>
@@ -356,23 +384,56 @@ export default function FlipkartAccountSettings() {
 
               {activeSection === 'orders' && (
                 <div className="bg-white rounded-2xl shadow-sm p-6 sm:p-10">
-                  <div className="text-center py-8 sm:py-16">
-                    <div className="relative inline-block mb-6">
-                      <svg className="w-20 h-20 sm:w-24 sm:h-24 text-gray-200" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1.65l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 12 7.4l3.38 4.6L17 10.83 14.92 8H20v6z"/>
-                      </svg>
-                      <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center shadow-lg">
-                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                        </svg>
+                  {loadingOrders ? (
+                    <div className="flex justify-center py-12">
+                      <div className="relative">
+                        <div className="animate-spin rounded-full h-12 w-12 border-t-3 border-b-3 border-[#800020]"></div>
+                        <div className="absolute inset-0 animate-ping rounded-full h-12 w-12 border-2 border-[#a0002a] opacity-20"></div>
                       </div>
                     </div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">No Orders Yet</h3>
-                    <p className="text-gray-600 text-sm sm:text-base mb-6">You haven't placed any orders yet. Start shopping now!</p>
-                    <button className="px-6 sm:px-8 py-3 bg-gradient-to-r from-[#800020] to-[#a0002a] text-white rounded-xl font-medium hover:shadow-lg transition-all duration-300 transform hover:scale-105">
-                      Start Shopping
-                    </button>
-                  </div>
+                  ) : orders.length > 0 ? (
+                    <div className="space-y-6">
+                      {orders.map((order) => (
+                        <div key={order._id} className="border-2 border-gray-200 rounded-xl p-4 sm:p-5 hover:border-[#800020] hover:shadow-lg transition-all duration-300 bg-gradient-to-br from-white to-gray-50">
+                          <div className="flex items-center justify-between">
+                            <div className="text-sm text-gray-600">Order ID: <span className="font-mono">{String(order._id).slice(-8)}</span></div>
+                            <div className="text-sm font-semibold text-gray-800">₹{order.amount}</div>
+                          </div>
+                          <div className="text-xs text-gray-500 mt-1">{new Date(order.createdAt).toLocaleString()}</div>
+                          <div className="mt-4 space-y-3">
+                            {order.items?.map((it, idx) => (
+                              <div key={idx} className="flex items-center gap-3">
+                                <img src={it.product?.images?.image1} alt={it.product?.title || ''} className="w-14 h-14 object-cover rounded-lg border" />
+                                <div className="flex-1">
+                                  <div className="text-sm font-medium text-gray-800">{it.product?.title}</div>
+                                  <div className="text-xs text-gray-600">Qty: {it.quantity}</div>
+                                </div>
+                                <div className="text-sm font-semibold text-gray-800">₹{(it.price || 0) * (it.quantity || 1)}</div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="text-center py-8 sm:py-16">
+                      <div className="relative inline-block mb-6">
+                        <svg className="w-20 h-20 sm:w-24 sm:h-24 text-gray-200" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1.65l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 12 7.4l3.38 4.6L17 10.83 14.92 8H20v6z"/>
+                        </svg>
+                        <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center shadow-lg">
+                          <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                          </svg>
+                        </div>
+                      </div>
+                      <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">No Orders Yet</h3>
+                      <p className="text-gray-600 text-sm sm:text-base mb-6">You haven't placed any orders yet. Start shopping now!</p>
+                      <button onClick={() => navigate('/shop')} className="px-6 sm:px-8 py-3 bg-gradient-to-r from-[#800020] to-[#a0002a] text-white rounded-xl font-medium hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                        Start Shopping
+                      </button>
+                    </div>
+                  )}
                 </div>
               )}
 

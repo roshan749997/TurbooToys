@@ -1,6 +1,7 @@
 import React, { useState, useContext, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
-import { getMyAddress, saveMyAddress, deleteAddressById } from '../services/api';
+import { getMyAddress, saveMyAddress, deleteAddressById, createPaymentOrder, verifyPayment } from '../services/api';
 
 const indianStates = [
   'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh',
@@ -14,6 +15,7 @@ const indianStates = [
 ].sort();
 
 export default function AddressForm() {
+  const navigate = useNavigate();
   const [showStateDropdown, setShowStateDropdown] = useState(false);
   const [filteredStates, setFilteredStates] = useState([...indianStates]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -63,7 +65,7 @@ export default function AddressForm() {
 
   const [showSuccess, setShowSuccess] = useState(false);
   const [showForm, setShowForm] = useState(true);
-  const { cart, cartTotal: total } = useCart();
+  const { cart, cartTotal: total, loadCart } = useCart();
 
   // Calculate price details
   const calculatePriceDetails = () => {
@@ -87,6 +89,57 @@ export default function AddressForm() {
   };
 
   const priceDetails = calculatePriceDetails();
+
+  const handlePayment = async () => {
+    if (!hasSavedAddress) {
+      alert('Please save your delivery address first.');
+      return;
+    }
+    try {
+      if (!window.Razorpay) {
+        await new Promise((resolve, reject) => {
+          const s = document.createElement('script');
+          s.src = 'https://checkout.razorpay.com/v1/checkout.js';
+          s.onload = resolve;
+          s.onerror = reject;
+          document.body.appendChild(s);
+        });
+      }
+      const amount = priceDetails.total;
+      const { order, key } = await createPaymentOrder(amount, {
+        name: formData.name,
+        mobile: formData.mobile,
+        city: formData.city,
+      });
+      const options = {
+        key,
+        amount: order.amount,
+        currency: order.currency,
+        name: 'SareeSansaar',
+        description: 'Order Payment',
+        order_id: order.id,
+        prefill: { name: formData.name || '', contact: formData.mobile || '' },
+        theme: { color: '#800020' },
+        handler: async function (response) {
+          try {
+            const r = await verifyPayment(response);
+            if (r && r.success) {
+              await loadCart();
+              navigate('/profile?tab=orders');
+            } else {
+              alert('Payment verification failed');
+            }
+          } catch (e) {
+            alert('Payment verification failed');
+          }
+        },
+      };
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+    } catch (e) {
+      alert('Unable to start payment');
+    }
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -638,14 +691,7 @@ export default function AddressForm() {
             </div>
 
             <button 
-              onClick={() => {
-                // TODO: Implement payment processing
-                if (!hasSavedAddress) {
-                  alert('Please save your delivery address first.');
-                  return;
-                }
-                alert('Proceeding to payment...');
-              }}
+              onClick={handlePayment}
               disabled={!hasSavedAddress}
               className={`w-full mt-4 py-3 px-4 rounded-md transition-colors font-medium cursor-pointer ${hasSavedAddress ? 'bg-[#800020] text-white hover:bg-[#660019]' : 'bg-gray-300 text-gray-600 cursor-not-allowed'}`}
             >

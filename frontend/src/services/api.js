@@ -98,3 +98,34 @@ export const deleteAddressById = async (id) => {
   if (!res.ok) throw new Error('Failed to delete address');
   return res.json();
 };
+
+export const createPaymentOrder = async (amount, notes = {}) => {
+  const res = await fetch(`${API_URL}/payment/orders`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...authHeaders() },
+    body: JSON.stringify({ amount, currency: 'INR', notes }),
+    credentials: 'include',
+  });
+  if (!res.ok) throw new Error('Failed to create payment order');
+  return res.json();
+};
+
+export const verifyPayment = async (payload) => {
+  const res = await fetch(`${API_URL}/payment/verify`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...authHeaders() },
+    body: JSON.stringify(payload),
+    credentials: 'include',
+  });
+  if (!res.ok) throw new Error('Failed to verify payment');
+  return res.json();
+};
+
+export const getMyOrders = async () => {
+  const res = await fetch(`${API_URL}/orders`, {
+    headers: { 'Content-Type': 'application/json', ...authHeaders() },
+    credentials: 'include',
+  });
+  if (!res.ok) throw new Error('Failed to fetch orders');
+  return res.json();
+};
