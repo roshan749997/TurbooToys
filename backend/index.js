@@ -6,11 +6,15 @@ import authRoutes from './routes/auth.routes.js';
 import headerRoutes from './routes/header.routes.js';
 import productRoutes from './routes/product.routes.js';
 import cartRoutes from './routes/cart.routes.js';
+import paymentRoutes from './routes/payment.routes.js';
 import addressRoutes from './routes/address.routes.js';
+import ordersRoutes from './routes/orders.routes.js';
 
 import connectDB from './config/DataBaseConnection.js';
 
 configDotenv();       
+
+console.log('Razorpay env loaded:', Boolean(process.env.RAZORPAY_KEY_ID), Boolean(process.env.RAZORPAY_KEY_SECRET));
 
 const server = express();
 
@@ -27,7 +31,9 @@ server.use('/api/auth', authRoutes);
 server.use('/api/header', headerRoutes);
 server.use('/api/products', productRoutes);
 server.use('/api/cart', cartRoutes);
+server.use('/api/payment', paymentRoutes);
 server.use('/api/address', addressRoutes);
+server.use('/api/orders', ordersRoutes);
 
 const PORT = process.env.PORT || 5000;
 
