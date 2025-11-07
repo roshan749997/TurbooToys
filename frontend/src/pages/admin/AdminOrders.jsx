@@ -28,15 +28,18 @@ const AdminOrders = () => {
     return () => { mounted = false; };
   }, []);
 
-  const StatusBadge = ({ status }) => {
-    const s = String(status || '').toLowerCase();
-    const map = {
-      paid: 'bg-rose-100 text-rose-700 border border-rose-200',
-      created: 'bg-amber-100 text-amber-700 border border-amber-200',
-      failed: 'bg-rose-200 text-rose-800 border border-rose-300',
-    };
-    const cls = map[s] || 'bg-gray-100 text-gray-700 border border-gray-200';
-    return <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${cls}`}>{status}</span>;
+  const StatusBadge = ({ paymentStatus }) => {
+    const paymentCls = paymentStatus === 'paid' 
+      ? 'bg-green-100 text-green-700 border border-green-200'
+      : paymentStatus === 'failed'
+      ? 'bg-red-100 text-red-700 border border-red-200'
+      : 'bg-gray-100 text-gray-700 border border-gray-200';
+    
+    return (
+      <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${paymentCls} text-center`}>
+        {paymentStatus || 'pending'}
+      </span>
+    );
   };
 
   const renderAddress = (a) => {
@@ -161,23 +164,37 @@ const AdminOrders = () => {
                 <div className="text-sm text-gray-700">{o.user?.name || ''}</div>
                 <div className="text-xs text-gray-500">{o.user?.email || ''}</div>
                 <div className="text-xs text-gray-500">{new Date(o.createdAt).toLocaleString()}</div>
-                <div className="text-xs text-gray-600">Status</div>
-                <div className="flex items-center gap-2">
-                  <select
-                    className="border rounded px-2 py-1 text-sm w-full"
-                    value={getTemp(o._id, o.status)}
-                    onChange={(e)=>changeTemp(o._id, e.target.value)}
-                  >
-                    {statusOptions.map(opt => (
-                      <option key={opt.value} value={opt.value}>{opt.label}</option>
-                    ))}
-                  </select>
+                <div className="grid grid-cols-2 gap-2 mt-2">
+                  <div>
+                    <div className="text-xs text-gray-600 mb-1">Order Status</div>
+                    <div className="flex items-center gap-2">
+                      <select
+                        className="border rounded px-2 py-1 text-sm w-full"
+                        value={getTemp(o._id, o.status)}
+                        onChange={(e)=>changeTemp(o._id, e.target.value)}
+                      >
+                        {statusOptions.map(opt => (
+                          <option key={opt.value} value={opt.value}>{opt.label}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-xs text-gray-600 mb-1">Payment Status</div>
+                    <div className="flex items-center h-[34px]">
+                      <StatusBadge 
+                        paymentStatus={o.status === 'failed' ? 'failed' : o.razorpayPaymentId ? 'paid' : 'pending'}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="flex justify-end mt-2">
                   <button
                     onClick={()=>saveStatus(o._id)}
                     disabled={updatingId===o._id || String(getTemp(o._id, o.status))===String(o.status)}
-                    className={`px-3 py-1 rounded text-white ${updatingId===o._id ? 'bg-gray-400' : 'bg-rose-600 hover:bg-rose-700'} disabled:opacity-60`}
+                    className={`px-3 py-1 rounded text-white text-sm ${updatingId===o._id ? 'bg-gray-400' : 'bg-rose-600 hover:bg-rose-700'} disabled:opacity-60`}
                   >
-                    {updatingId===o._id ? 'Saving...' : 'Save'}
+                    {updatingId===o._id ? 'Saving...' : 'Save Changes'}
                   </button>
                 </div>
               </div>
@@ -192,7 +209,8 @@ const AdminOrders = () => {
                   <th className="p-2 hidden lg:table-cell">Address</th>
                   <th className="p-2 hidden md:table-cell">Items</th>
                   <th className="p-2 whitespace-nowrap">Amount</th>
-                  <th className="p-2">Status</th>
+                  <th className="p-2">Order Status</th>
+                  <th className="p-2">Payment Status</th>
                   <th className="p-2">Actions</th>
                   <th className="p-2 hidden lg:table-cell">Date</th>
                 </tr>
@@ -221,8 +239,22 @@ const AdminOrders = () => {
                           <option key={opt.value} value={opt.value}>{opt.label}</option>
                         ))}
                       </select>
-                      <StatusBadge status={getTemp(o._id, o.status)} />
+                      <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                        getTemp(o._id, o.status) === 'created' ? 'bg-amber-100 text-amber-700 border border-amber-200' :
+                        getTemp(o._id, o.status) === 'confirmed' ? 'bg-blue-100 text-blue-700 border border-blue-200' :
+                        getTemp(o._id, o.status) === 'on_the_way' ? 'bg-indigo-100 text-indigo-700 border border-indigo-200' :
+                        getTemp(o._id, o.status) === 'delivered' ? 'bg-green-100 text-green-700 border border-green-200' :
+                        getTemp(o._id, o.status) === 'failed' ? 'bg-rose-200 text-rose-800 border border-rose-300' :
+                        'bg-gray-100 text-gray-700 border border-gray-200'
+                      }`}>
+                        {String(getTemp(o._id, o.status) || '').replace(/_/g, ' ')}
+                      </span>
                     </div>
+                  </td>
+                  <td className="p-2">
+                    <StatusBadge 
+                      paymentStatus={o.status === 'failed' ? 'failed' : o.razorpayPaymentId ? 'paid' : 'pending'}
+                    />
                   </td>
                   <td className="p-2">
                     <button
