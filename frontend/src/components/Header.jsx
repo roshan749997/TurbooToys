@@ -214,18 +214,66 @@ const Header = () => {
                 <h3 className="text-base font-medium text-gray-800">
                   {categories.find(cat => cat.name === activeCategory)?.name}
                 </h3>
-                <button 
-                  onClick={() => setActiveCategory(null)}
-                  className="p-2 -mr-2 text-gray-500 hover:text-gray-700 focus:outline-none"
-                  aria-label="Close menu"
-                >
-                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
+                <div className="flex items-center gap-2">
+                  <Link
+                    to={categories.find(cat => cat.name === activeCategory)?.path || '#'}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      const cat = categories.find(c => c.name === activeCategory);
+                      setActiveCategory(null);
+                      if (cat?.path) navigate(cat.path);
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                    onTouchEnd={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      const cat = categories.find(c => c.name === activeCategory);
+                      setActiveCategory(null);
+                      if (cat?.path) navigate(cat.path);
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                    className="px-3 py-1.5 text-sm border rounded text-gray-700 hover:text-rose-600 hover:border-rose-300"
+                  >
+                    All {categories.find(cat => cat.name === activeCategory)?.name}
+                  </Link>
+                  <button 
+                    onClick={() => setActiveCategory(null)}
+                    className="p-2 -mr-2 text-gray-500 hover:text-gray-700 focus:outline-none"
+                    aria-label="Close menu"
+                  >
+                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
               </div>
               <div className="relative max-h-[calc(100vh-180px)] overflow-y-auto">
                 <div className="divide-y divide-gray-100">
+                  {/* All link */}
+                  <Link
+                    to={categories.find(cat => cat.name === activeCategory)?.path || '#'}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      const path = categories.find(cat => cat.name === activeCategory)?.path;
+                      setActiveCategory(null);
+                      if (path) navigate(path);
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                    onTouchEnd={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      const path = categories.find(cat => cat.name === activeCategory)?.path;
+                      setActiveCategory(null);
+                      if (path) navigate(path);
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                    className="block px-6 py-3 text-sm font-medium text-gray-800 hover:text-rose-500 hover:bg-rose-50 transition-colors duration-200"
+                  >
+                    All {categories.find(cat => cat.name === activeCategory)?.name}
+                  </Link>
+
                   {categories
                     .find(cat => cat.name === activeCategory)
                     ?.subcategories?.map((subcategory) => (
