@@ -32,6 +32,20 @@ export default function FlipkartAccountSettings() {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const StatusBadge = ({ status }) => {
+    const s = String(status || '').toLowerCase();
+    const map = {
+      created: 'bg-amber-100 text-amber-700 border border-amber-200',
+      confirmed: 'bg-blue-100 text-blue-700 border border-blue-200',
+      on_the_way: 'bg-indigo-100 text-indigo-700 border border-indigo-200',
+      delivered: 'bg-emerald-100 text-emerald-700 border border-emerald-200',
+      failed: 'bg-rose-100 text-rose-700 border border-rose-200',
+      paid: 'bg-rose-100 text-rose-700 border border-rose-200',
+    };
+    const cls = map[s] || 'bg-gray-100 text-gray-700 border border-gray-200';
+    return <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${cls}`}>{status}</span>;
+  };
+
   const fetchUserData = async () => {
     try {
       const userData = await api.me();
@@ -96,6 +110,18 @@ export default function FlipkartAccountSettings() {
     };
     if (activeSection === 'orders') load();
   }, [activeSection]);
+
+  const refreshOrders = async () => {
+    try {
+      setLoadingOrders(true);
+      const data = await getMyOrders();
+      setOrders(Array.isArray(data) ? data : []);
+    } catch (e) {
+      setOrders([]);
+    } finally {
+      setLoadingOrders(false);
+    }
+  };
 
   const toggleMenu = (menu) => {
     setExpandedMenu(expandedMenu === menu ? null : menu);
@@ -187,7 +213,7 @@ export default function FlipkartAccountSettings() {
             )}
 
             {/* User Profile - Desktop only */}
-            <div className="hidden lg:block p-6 border-b bg-gradient-to-br from-red-50 to-rose-50">
+            <div className="hidden lg:block p-6 border-b bg-gradient-to-r from-red-50 to-rose-50">
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#800020] to-[#a0002a] flex items-center justify-center text-white text-2xl font-bold shadow-lg ring-4 ring-red-100">
                   {user.firstName.charAt(0)}
@@ -415,6 +441,10 @@ export default function FlipkartAccountSettings() {
 
               {activeSection === 'orders' && (
                 <div className="bg-white rounded-2xl shadow-sm p-6 sm:p-10">
+                  <div className="flex items-center justify-between mb-4">
+                    <h2 className="text-lg font-semibold text-gray-800">Your Orders</h2>
+                    <button onClick={refreshOrders} className="px-3 py-1.5 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-sm">Refresh</button>
+                  </div>
                   {loadingOrders ? (
                     <div className="flex justify-center py-12">
                       <div className="relative">
@@ -428,7 +458,10 @@ export default function FlipkartAccountSettings() {
                         <div key={order._id} className="border-2 border-gray-200 rounded-xl p-4 sm:p-5 hover:border-[#800020] hover:shadow-lg transition-all duration-300 bg-gradient-to-br from-white to-gray-50">
                           <div className="flex items-center justify-between">
                             <div className="text-sm text-gray-600">Order ID: <span className="font-mono">{String(order._id).slice(-8)}</span></div>
-                            <div className="text-sm font-semibold text-gray-800">₹{order.amount}</div>
+                            <div className="flex items-center gap-3">
+                              <StatusBadge status={order.status} />
+                              <div className="text-sm font-semibold text-gray-800">₹{order.amount}</div>
+                            </div>
                           </div>
                           <div className="text-xs text-gray-500 mt-1">{new Date(order.createdAt).toLocaleString()}</div>
                           <div className="mt-4 space-y-3">
