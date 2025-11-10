@@ -49,6 +49,33 @@ export async function createProduct(req, res) {
   }
 }
 
+export async function updateOrderStatus(req, res) {
+  try {
+    const { id } = req.params;
+    let { status, orderStatus } = req.body || {};
+    const newStatus = (status || orderStatus || '').toString().toLowerCase();
+
+    const allowed = new Set(['created','confirmed','on_the_way','delivered','failed','paid']);
+    if (!allowed.has(newStatus)) {
+      return res.status(400).json({ message: 'Invalid status', allowed: Array.from(allowed) });
+    }
+
+    const order = await Order.findByIdAndUpdate(
+      id,
+      { $set: { status: newStatus } },
+      { new: true }
+    );
+
+    if (!order) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+
+    return res.json(order);
+  } catch (err) {
+    return res.status(500).json({ message: 'Failed to update order status', error: err.message });
+  }
+}
+
 export async function adminListProducts(req, res) {
   try {
     const products = await Product.find({}).sort({ createdAt: -1 });
