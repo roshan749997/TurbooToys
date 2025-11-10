@@ -1,5 +1,15 @@
 import { Product } from '../models/product.js';
 
+const CATEGORY_GROUPS = {
+  'Designer Sarees': [
+    'Party Wear Saree',
+    'Wedding Sarees',
+    'Festive Sarees',
+    'Bollywood Style Sarees',
+    'Heavy Embroidered Sarees'
+  ]
+};
+
 export const getProducts = async (req, res) => {
   try {
     // Accept either `subcategory` (preferred) or `category` query param
@@ -13,15 +23,21 @@ export const getProducts = async (req, res) => {
     if (category) {
       // Try multiple ways to match the category or subcategory fields
       const re = new RegExp(category, 'i');
-      query = {
-        $or: [
-          { 'category.name': { $regex: re } },
-          { 'category': { $regex: re } },
-          { 'category.slug': { $regex: re } },
-          { 'subcategory': { $regex: re } },
-          { 'tags': { $regex: re } }
-        ]
-      };
+      const orConditions = [
+        { 'category.name': { $regex: re } },
+        { 'category': { $regex: re } },
+        { 'category.slug': { $regex: re } },
+        { 'subcategory': { $regex: re } },
+        { 'tags': { $regex: re } }
+      ];
+
+      if (CATEGORY_GROUPS[category]) {
+        CATEGORY_GROUPS[category].forEach((sub) => {
+          orConditions.push({ category: { $regex: new RegExp(sub, 'i') } });
+        });
+      }
+
+      query = { $or: orConditions };
 
       console.log('Search query:', JSON.stringify(query, null, 2));
     }
