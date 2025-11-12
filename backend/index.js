@@ -2,8 +2,7 @@ import { configDotenv } from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import session from 'express-session';
-import passport from './config/passport.js';
+import passport, { setupPassport } from './config/passport.js';
 
 import authRoutes from './routes/auth.routes.js';
 import headerRoutes from './routes/header.routes.js';
@@ -34,20 +33,9 @@ server.use(cors({
 server.use(express.json());
 server.use(cookieParser());
 
-// Sessions are needed for Passport OAuth flow (not for JWT auth)
-server.use(
-  session({
-    secret: process.env.SESSION_SECRET || process.env.JWT_SECRET || 'dev_session_secret_change_me',
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      sameSite: (process.env.NODE_ENV === 'production' || String(process.env.BACKEND_URL || '').startsWith('https://')) ? 'none' : 'lax',
-      secure: (process.env.NODE_ENV === 'production' || String(process.env.BACKEND_URL || '').startsWith('https://')),
-    },
-  })
-);
+// Initialize Passport strategies
+setupPassport();
 server.use(passport.initialize());
-server.use(passport.session());
 
 server.get('/api/health', (req, res) => res.json({ ok: true }));
 // Cookie-JWT protected current user info (Google/local unified)
