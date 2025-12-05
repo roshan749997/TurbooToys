@@ -48,7 +48,7 @@ const SignIn = () => {
 
     try {
       const resp = await api.signin({ email: formData.email, password: formData.password });
-      
+
       // Clear any existing cookies from Google/OTP login since we're using localStorage token
       // This ensures email/password login uses Authorization header, not old cookies
       try {
@@ -60,7 +60,7 @@ const SignIn = () => {
       } catch (e) {
         console.warn('Failed to clear cookies:', e);
       }
-      
+
       // Store token then redirect to intended page or home
       if (resp?.token) {
         localStorage.setItem('auth_token', resp.token);
@@ -104,7 +104,7 @@ const SignIn = () => {
     e.preventDefault();
     setError('');
     setSuccess('');
-    
+
     if (mobile.length !== 10) {
       setError('Please enter a valid 10-digit mobile number');
       return;
@@ -113,11 +113,11 @@ const SignIn = () => {
     setLoading(true);
     try {
       const data = await api.sendOtp(mobile);
-      
+
       if (!data.success) {
         throw new Error(data?.message || 'Failed to send OTP');
       }
-      
+
       setSuccess('OTP sent to your mobile number');
       setStep(2);
       setResendTimer(30);
@@ -132,7 +132,7 @@ const SignIn = () => {
     e.preventDefault();
     setError('');
     setSuccess('');
-    
+
     if (otp.length !== 6) {
       setError('Please enter a valid 6-digit OTP');
       return;
@@ -141,11 +141,11 @@ const SignIn = () => {
     setLoading(true);
     try {
       const data = await api.verifyOtp({ mobile, otp });
-      
+
       if (!data.success) {
         throw new Error(data?.message || 'Invalid OTP');
       }
-      
+
       // Clear any existing cookies from Google login since OTP uses localStorage token
       try {
         document.cookie.split(";").forEach((c) => {
@@ -156,7 +156,7 @@ const SignIn = () => {
       } catch (e) {
         console.warn('Failed to clear cookies:', e);
       }
-      
+
       // Store token and redirect
       if (data?.token) {
         localStorage.setItem('auth_token', data.token);
@@ -178,16 +178,16 @@ const SignIn = () => {
 
   const handleResendOtp = async () => {
     if (resendTimer > 0) return;
-    
+
     setError('');
     setLoading(true);
     try {
       const data = await api.sendOtp(mobile);
-      
+
       if (!data.success) {
         throw new Error(data?.message || 'Failed to resend OTP');
       }
-      
+
       setSuccess('OTP resent to your mobile number');
       setResendTimer(30);
       setOtp('');
@@ -249,7 +249,7 @@ const SignIn = () => {
             <div className="bg-white rounded-2xl shadow-lg p-6 border border-neutral-100">
               {error && (<div className="mb-4 text-sm text-red-600">{error}</div>)}
               {success && (<div className="mb-4 text-sm text-green-600">{success}</div>)}
-              
+
               {loginMode === 'email' ? (
                 <form onSubmit={handleEmailLogin} className="space-y-4">
                   <div>
@@ -446,10 +446,12 @@ const SignIn = () => {
                 <button
                   type="button"
                   onClick={() => {
-                    let SERVER_BASE = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+                    let SERVER_BASE = import.meta.env.VITE_BACKEND_BASE || 'http://localhost:5000';
                     // Remove trailing slash if present
                     SERVER_BASE = SERVER_BASE.replace(/\/+$/, '');
                     window.location.href = `${SERVER_BASE}/api/auth/google`;
+
+
                   }}
                   className="flex items-center justify-center w-full px-4 py-2 border border-neutral-200 rounded-lg hover:bg-neutral-50 transition-colors"
                 >
