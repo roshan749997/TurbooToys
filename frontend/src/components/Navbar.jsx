@@ -176,7 +176,7 @@ const Navbar = () => {
           {/* Logo/Brand */}
           <Link to="/" className="flex-shrink-0 ml-4 sm:ml-5 md:ml-6 lg:ml-8">
             <img 
-              src="https://res.cloudinary.com/duc9svg7w/image/upload/v1764595982/1764595904281_dqbu0s.png" 
+              src="https://res.cloudinary.com/duc9svg7w/image/upload/v1764917357/Gemini_Generated_Image_ug37yqug37yqug37__1_-removebg-preview_dxcmnz.png" 
               alt="SareeSansaar Logo" 
               className="h-10 sm:h-12 md:h-14 w-auto hover:scale-105 transition-transform duration-300"
             />
