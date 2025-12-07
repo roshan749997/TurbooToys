@@ -1,4 +1,4 @@
-# SareeSansaar - Setup Instructions
+# TurbooToys - Setup Instructions
 
 ## 🎉 Components Created
 
@@ -29,7 +29,7 @@ npm run dev
 ## 🎨 Design Features
 
 ### Header
-- **Brand Name**: "SareeSansaar" in elegant serif font with pink-to-gold gradient
+- **Brand Name**: "TurbooToys" in bold font with red-to-orange gradient
 - **Navigation**: Home, Shop, Collections, About, Contact
 - **Search Bar**: Rounded search input with icon
 - **Icons**: Shopping cart with counter badge, user account icon
@@ -42,7 +42,7 @@ npm run dev
 - **Social Media**: Facebook, Instagram, Pinterest icons with hover effects
 - **Newsletter**: Email subscription form
 - **Contact Info**: Email and phone with icons
-- **Copyright**: "© 2025 SareeSansaar. All rights reserved."
+- **Copyright**: "© 2025 TurbooToys. All rights reserved."
 - **Responsive**: Adapts beautifully to all screen sizes
 
 ### Layout
@@ -83,4 +83,4 @@ All components are fully responsive with:
 - ✅ Contact form
 - ✅ Responsive grid layouts
 
-Enjoy building your SareeSansaar e-commerce website! 🎊
+Enjoy building your TurbooToys e-commerce website! 🎊

@@ -6,97 +6,105 @@ const Header = () => {
   const headerRef = useRef(null);
   const navigate = useNavigate();
 
-  const categories = [
+  // All categories for desktop
+  const allCategories = [
     { 
-      name: 'SILK', 
-      path: '/category/silk',
+      name: 'CARS', 
+      path: '/category/cars',
       subcategories: [
-        { name: 'SOFT SILK SAREES', path: '/category/silk/soft-silk-sarees' },
-        { name: 'KANJIVARAM SILK SAREES', path: '/category/silk/kanjivaram-silk-sarees' },
-        { name: 'BANARASI SILK SAREES', path: '/category/silk/banarasi-silk-sarees' },
-        { name: 'MAHESHWARI SILK SAREES', path: '/category/silk/maheshwari-silk-sarees' },
-        { name: 'RAW SILK SAREES', path: '/category/silk/raw-silk-sarees' },
-        { name: 'MYSORE SILK SAREES', path: '/category/silk/mysore-silk-sarees' },
-        { name: 'SAMBALPURI SILK SAREES', path: '/category/silk/sambalpuri-silk-sarees' },
-        { name: 'KALAMKARI PRINT SILK SAREES', path: '/category/silk/kalamkari-print-silk-sarees' }
-
+        { name: 'HOTWHEELS CARS', path: '/category/cars/hotwheels-cars' },
+        { name: 'SUPERCARS', path: '/category/cars/supercars' },
+        { name: 'CLASSIC CARS', path: '/category/cars/classic-cars' },
+        { name: 'SPORTS CARS', path: '/category/cars/sports-cars' },
+        { name: 'LUXURY CARS', path: '/category/cars/luxury-cars' },
+        { name: 'DRIFT CARS', path: '/category/cars/drift-cars' }
       ]
     },
     { 
-      name: 'COTTON', 
-      path: '/category/cotton',
+      name: 'SUVS', 
+      path: '/category/suvs',
       subcategories: [
-  { name: 'BENGALI COTTON SAREES', path: '/category/cotton/bengali-cotton-sarees' },
-  { name: 'MAHESHWARI COTTON SAREES', path: '/category/cotton/maheshwari-cotton-sarees' },
-  { name: 'JAIPUR COTTON SAREES', path: '/category/cotton/jaipur-cotton-sarees' },
-  { name: 'SOUTH COTTON SAREES', path: '/category/cotton/south-cotton-sarees' },
-  { name: 'OFFICE WEAR COTTON SAREES', path: '/category/cotton/office-wear-cotton-sarees' },
-  { name: 'DR.KHADI COTTON SAREES', path: '/category/cotton/dr-khadi-cotton-sarees' },
-  { name: 'BLOCK PRINTED COTTON SAREES', path: '/category/cotton/block-printed-cotton-sarees' },
-  { name: 'BAGRU PRINT COTTON SAREES', path: '/category/cotton/bagru-print-cotton-sarees' },
-  { name: 'AJRAKH PRINT COTTON SAREES', path: '/category/cotton/ajrakh-print-cotton-sarees' },
-  { name: 'IKKAT COTTON SAREES', path: '/category/cotton/ikkat-cotton-sarees' },
-  { name: 'CHANDERI COTTON SILKS', path: '/category/cotton/chanderi-cotton-silks' },
-  { name: 'KALAMKARI COTTON SAREES', path: '/category/cotton/kalamkari-cotton-sarees' },]
-
-    },
-    {
-      name: 'REGIONAL',
-      path: '/category/regional',
-      subcategories: [
-        { name: 'SAMBALPURI REGIONAL SAREES', path: '/category/regional/sambalpuri-regional-sarees' },
-        { name: 'KANJIVARAM REGIONAL SAREES', path: '/category/regional/kanjivaram-regional-sarees' },
-        { name: 'BENGALI REGIONAL SAREES', path: '/category/regional/bengali-regional-sarees' },
-        { name: 'MYSORE REGIONAL SAREES', path: '/category/regional/mysore-regional-sarees' },
-        { name: 'MAHESHWARI REGIONAL SAREES', path: '/category/regional/maheshwari-regional-sarees' },
-        { name: 'KARNATAKA REGIONAL SAREES', path: '/category/regional/karnataka-regional-sarees' },
-        { name: 'TAMILNADU REGIONAL SAREES', path: '/category/regional/tamilnadu-regional-sarees' },
-        { name: 'BANARASI REGIONAL SAREES', path: '/category/regional/banarasi-regional-sarees' },
-        { name: 'BANARASI REGIONAL DUPATTA', path: '/category/regional/banarasi-regional-dupatta' }
+        { name: 'OFF-ROAD SUVS', path: '/category/suvs/off-road-suvs' },
+        { name: 'MONSTER SUVS', path: '/category/suvs/monster-suvs' },
+        { name: 'PREMIUM SUVS', path: '/category/suvs/premium-suvs' }
       ]
     },
     { 
-      name: 'BANARASI', 
-      path: '/category/banarasi',
+      name: 'TRUCKS', 
+      path: '/category/trucks',
       subcategories: [
-        { name: 'BANARASI SAREES', path: '/category/banarasi/banarasi-sarees' },
-        { name: 'BANARASI DUPATTA', path: '/category/banarasi/banarasi-dupatta' },
-        { name: 'BANARASI DRESS MATERIAL', path: '/category/banarasi/banarasi-dress-material' }
+        { name: 'MONSTER TRUCKS', path: '/category/trucks/monster-trucks' },
+        { name: 'PICKUP TRUCKS', path: '/category/trucks/pickup-trucks' },
+        { name: 'HEAVY-DUTY TRUCKS', path: '/category/trucks/heavy-duty-trucks' }
       ]
     },
     { 
-      name: 'DESIGNER SAREES', 
-      path: '/category/designer-sarees',
+      name: 'BIKES', 
+      path: '/category/bikes',
       subcategories: [
-        { name: 'PARTY WEAR SAREE', path: '/category/designer-sarees/party-wear-saree' },
-        { name: 'WEDDING SAREES', path: '/category/designer-sarees/wedding-sarees' },
-        { name: 'FESTIVE SAREES', path: '/category/designer-sarees/festive-sarees' },
-        { name: 'BOLLYWOOD STYLE SAREES', path: '/category/designer-sarees/bollywood-style-sarees' },
-        { name: 'HEAVY EMBROIDERED SAREES', path: '/category/designer-sarees/heavy-embroidered-sarees' }
+        { name: 'SPORTS BIKES', path: '/category/bikes/sports-bikes' },
+        { name: 'DIRT BIKES', path: '/category/bikes/dirt-bikes' },
+        { name: 'SUPERBIKES', path: '/category/bikes/superbikes' }
       ]
     },
     { 
-      name: 'PRINTED SAREES', 
-      path: '/category/printed-sarees',
+      name: 'CONSTRUCTION TOYS', 
+      path: '/category/construction-toys',
       subcategories: [
-        { name: 'FLORAL PRINTED SAREES', path: '/category/printed-sarees/floral-printed-sarees' },
-        { name: 'DIGITAL PRINTED SAREES', path: '/category/printed-sarees/digital-printed-sarees' },
-        { name: 'BLOCK PRINTED SAREES', path: '/category/printed-sarees/block-printed-sarees' },
-        { name: 'ABSTRACT PRINTED SAREES', path: '/category/printed-sarees/abstract-printed-sarees' },
-        { name: 'GEOMETRIC PRINTED SAREES', path: '/category/printed-sarees/geometric-printed-sarees' }
+        { name: 'BULLDOZER', path: '/category/construction-toys/bulldozer' },
+        { name: 'EXCAVATOR', path: '/category/construction-toys/excavator' },
+        { name: 'CRANE', path: '/category/construction-toys/crane' },
+        { name: 'LOADER', path: '/category/construction-toys/loader' }
       ]
     },
     { 
-      name: 'JEWELLERY', 
-      path: '/category/jewellery',
+      name: 'FARM VEHICLES', 
+      path: '/category/farm-vehicles',
       subcategories: [
-        { name: 'NECKLACE', path: '/category/jewellery/necklace' },
-        { name: 'EARRINGS', path: '/category/jewellery/earrings' },
-        { name: 'BRACELETS', path: '/category/jewellery/bracelets' },
-        { name: 'BANGLES', path: '/category/jewellery/bangles' }
+        { name: 'TRACTORS', path: '/category/farm-vehicles/tractors' },
+        { name: 'HARVESTERS', path: '/category/farm-vehicles/harvesters' },
+        { name: 'FARM MACHINES', path: '/category/farm-vehicles/farm-machines' }
       ]
     },
+    { 
+      name: 'REMOTE CONTROL (RC) VEHICLES', 
+      path: '/category/rc-vehicles',
+      subcategories: [
+        { name: 'RC CARS', path: '/category/rc-vehicles/rc-cars' },
+        { name: 'RC MONSTER TRUCKS', path: '/category/rc-vehicles/rc-monster-trucks' },
+        { name: 'RC OFF-ROAD VEHICLES', path: '/category/rc-vehicles/rc-off-road-vehicles' }
+      ]
+    },
+    { 
+      name: 'NEW ARRIVALS', 
+      path: '/category/new-arrivals',
+      subcategories: [
+        { name: 'LATEST TOY CARS', path: '/category/new-arrivals/latest-toy-cars' },
+        { name: 'TRENDING ITEMS', path: '/category/new-arrivals/trending-items' }
+      ]
+    },
+    { 
+      name: 'COLLECTIONS', 
+      path: '/category/collections',
+      subcategories: [
+        { name: 'PREMIUM COLLECTION', path: '/category/collections/premium-collection' },
+        { name: 'LIMITED EDITION', path: '/category/collections/limited-edition' },
+        { name: 'BEST SELLERS', path: '/category/collections/best-sellers' }
+      ]
+    }
   ];
+
+  // Mobile view: Only show CARS, SUVS, SPORTS, TRUCKS, BIKES
+  const mobileCategories = [
+    { name: 'CARS', path: '/category/cars' },
+    { name: 'SUVS', path: '/category/suvs' },
+    { name: 'SPORTS', path: '/category/sports' },
+    { name: 'TRUCKS', path: '/category/trucks' },
+    { name: 'BIKES', path: '/category/bikes' }
+  ];
+
+  // Use allCategories for desktop, mobileCategories for mobile
+  const categories = allCategories;
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -122,9 +130,9 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky top-16 md:top-20 z-40 bg-white border-t border-gray-200 shadow-sm">
+    <header className="md:hidden sticky top-16 md:top-20 z-40 bg-white border-t border-gray-200 shadow-sm">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Desktop Navigation */}
+        {/* Desktop Navigation - Hidden on all screens now */}
         <div className="hidden md:flex items-center justify-center space-x-8 py-3" ref={headerRef}>
           {categories.map((category) => (
             <div key={category.name} className="relative group">
@@ -178,142 +186,25 @@ const Header = () => {
           ))}
         </div>
 
-        {/* Mobile Navigation - Horizontal Scroll */}
+        {/* Mobile Navigation - Horizontal Scroll - Only Main Categories */}
         <div className="md:hidden -mx-4 relative z-50">
-          {/* Main Categories */}
-          <div className="flex space-x-1 overflow-x-auto px-4 pt-3 pb-2 hide-scrollbar sticky top-16 z-50 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b border-gray-200">
-            {categories.map((category) => (
+          {/* Main Categories - Direct Links, No Subcategories - Centered */}
+          <div className="flex justify-center items-center space-x-1 overflow-x-auto px-4 pt-3 pb-2 hide-scrollbar sticky top-16 z-50 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b border-gray-200">
+            {mobileCategories.map((category) => (
               <div key={category.name} className="shrink-0">
-                <button
-                  onClick={(e) => {
-                    // First tap opens subcategories, second tap navigates to the category page
-                    if (activeCategory === category.name) {
-                      setActiveCategory(null);
-                      navigate(category.path);
-                    } else {
-                      handleClick(category.name, e);
-                    }
+                <Link
+                  to={category.path}
+                  onClick={() => {
+                    setActiveCategory(null);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
-                  className={`px-4 py-2 text-sm font-medium transition-colors duration-200 whitespace-nowrap relative flex items-center ${
-                    activeCategory === category.name 
-                      ? 'text-rose-500 border-b-2 border-rose-500' 
-                      : 'text-gray-700 hover:text-rose-500 border-b-2 border-transparent'
-                  }`}
+                  className="px-4 py-2 text-sm font-medium transition-colors duration-200 whitespace-nowrap relative flex items-center text-gray-700 hover:text-rose-500 border-b-2 border-transparent hover:border-rose-500"
                 >
                   {category.name}
-                  <svg
-                    className={`w-4 h-4 ml-1 transition-transform duration-200 ${
-                      activeCategory === category.name ? 'rotate-180' : ''
-                    }`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
+                </Link>
               </div>
             ))}
           </div>
-          
-          {/* Subcategories */}
-          {activeCategory && (
-            <div className="fixed inset-0 z-50 bg-white overflow-y-auto pt-20">
-              {/* Close button at top */}
-              <div className="fixed top-16 left-0 right-0 bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between z-50">
-                <h3 className="text-base font-medium text-gray-800">
-                  {categories.find(cat => cat.name === activeCategory)?.name}
-                </h3>
-                <div className="flex items-center gap-2">
-                  <Link
-                    to={categories.find(cat => cat.name === activeCategory)?.path || '#'}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      const cat = categories.find(c => c.name === activeCategory);
-                      setActiveCategory(null);
-                      if (cat?.path) navigate(cat.path);
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }}
-                    onTouchEnd={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      const cat = categories.find(c => c.name === activeCategory);
-                      setActiveCategory(null);
-                      if (cat?.path) navigate(cat.path);
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }}
-                    className="px-3 py-1.5 text-sm border rounded text-gray-700 hover:text-rose-600 hover:border-rose-300"
-                  >
-                    All {categories.find(cat => cat.name === activeCategory)?.name}
-                  </Link>
-                  <button 
-                    onClick={() => setActiveCategory(null)}
-                    className="p-2 -mr-2 text-gray-500 hover:text-gray-700 focus:outline-none"
-                    aria-label="Close menu"
-                  >
-                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-              <div className="relative max-h-[calc(100vh-180px)] overflow-y-auto">
-                <div className="divide-y divide-gray-100">
-                  {/* All link */}
-                  <Link
-                    to={categories.find(cat => cat.name === activeCategory)?.path || '#'}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      const path = categories.find(cat => cat.name === activeCategory)?.path;
-                      setActiveCategory(null);
-                      if (path) navigate(path);
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }}
-                    onTouchEnd={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      const path = categories.find(cat => cat.name === activeCategory)?.path;
-                      setActiveCategory(null);
-                      if (path) navigate(path);
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }}
-                    className="block px-6 py-3 text-sm font-medium text-gray-800 hover:text-rose-500 hover:bg-rose-50 transition-colors duration-200"
-                  >
-                    All {categories.find(cat => cat.name === activeCategory)?.name}
-                  </Link>
-
-                  {categories
-                    .find(cat => cat.name === activeCategory)
-                    ?.subcategories?.map((subcategory) => (
-                    <Link
-                      key={subcategory.name}
-                      to={subcategory.path}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        setActiveCategory(null);
-                        navigate(subcategory.path);
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                      }}
-                      onTouchEnd={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        setActiveCategory(null);
-                        navigate(subcategory.path);
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                      }}
-                      className="block px-6 py-3 text-sm text-gray-700 hover:text-rose-500 hover:bg-rose-50 transition-colors duration-200"
-                    >
-                      {subcategory.name}
-                    </Link>
-                  ))}
-                </div>
-                <div className="sticky bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
-              </div>
-            </div>
-          )}
           
           <style jsx>{`
             .hide-scrollbar::-webkit-scrollbar {

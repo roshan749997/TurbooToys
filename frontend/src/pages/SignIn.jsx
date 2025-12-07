@@ -446,7 +446,7 @@ const SignIn = () => {
                 <button
                   type="button"
                   onClick={() => {
-                    let SERVER_BASE = import.meta.env.VITE_BACKEND_BASE || 'http://localhost:5000';
+                    let SERVER_BASE = import.meta.env.VITE_BACKEND_BASE || 'http://localhost:5500';
                     // Remove trailing slash if present
                     SERVER_BASE = SERVER_BASE.replace(/\/+$/, '');
                     window.location.href = `${SERVER_BASE}/api/auth/google`;

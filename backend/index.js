@@ -67,7 +67,7 @@ server.use('/api/address', addressRoutes);
 server.use('/api/orders', ordersRoutes);
 server.use('/api/admin', adminRoutes);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5500;
 
 // Connect DB
 await connectDB(process.env.MONGODB_URI || '');

@@ -26,12 +26,12 @@ const Layout = () => {
         <div>
           <Navbar />
         </div>
-        <div className="h-px bg-black/10" aria-hidden="true" />
+        <div className="h-px bg-black/10 md:hidden" aria-hidden="true" />
         <Header />
       </div>
 
-      {/* Spacer equal to header height to avoid overlap */}
-      <div aria-hidden="true" style={{ height: headerHeight }} className="bg-white border-b border-gray-300" />
+      {/* Spacer equal to header height to avoid overlap - Hidden on desktop when header is hidden */}
+      <div aria-hidden="true" style={{ height: headerHeight }} className="bg-white border-b border-gray-300 md:border-b-0" />
 
       {/* Main Content Area with responsive padding */}
       <main className="flex-grow">
