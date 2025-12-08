@@ -23,7 +23,7 @@ const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { addToCart } = useCart();
-  const [saree, setSaree] = useState(null);
+  const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(1);
@@ -34,36 +34,36 @@ const ProductDetail = () => {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    const loadSaree = async () => {
+    const loadProduct = async () => {
       try {
         setLoading(true);
         const data = await fetchSareeById(id);
-        setSaree(data);
+        setProduct(data);
       } catch (err) {
-        console.error('Failed to load saree details:', err);
-        setError('Failed to load saree details. Please try again later.');
+        console.error('Failed to load product details:', err);
+        setError('Failed to load product details. Please try again later.');
       } finally {
         setLoading(false);
       }
     };
 
-    loadSaree();
+    loadProduct();
   }, [id]);
 
   // Initialize wishlist state when product loads
   useEffect(() => {
-    if (!saree) return;
+    if (!product) return;
     const list = readWishlist();
-    const pid = saree._id || id;
+    const pid = product._id || id;
     setWishlisted(list.some(p => (p._id || p.id) === pid));
-  }, [saree, id]);
+  }, [product, id]);
 
   const handleAddToCart = async () => {
-    if (!saree) return;
+    if (!product) return;
     setIsAdding(true);
     try {
       await addToCart(id, quantity);
-      alert(`${saree.title} ${quantity > 1 ? `(${quantity} items) ` : ''}added to cart!`);
+      alert(`${product.title} ${quantity > 1 ? `(${quantity} items) ` : ''}added to cart!`);
     } catch (error) {
       console.error('Error adding to cart:', error);
       alert('Failed to add item to cart. Please try again.');
@@ -80,8 +80,8 @@ const ProductDetail = () => {
   const handleShare = async () => {
     try {
       const shareData = {
-        title: saree?.title || 'Saree',
-        text: saree?.description?.slice(0, 120) || 'Check out this saree!',
+        title: product?.title || 'Toy Car',
+        text: product?.description?.slice(0, 120) || 'Check out this toy car!',
         url: window.location.href,
       };
       if (navigator.share) {
@@ -120,7 +120,7 @@ const ProductDetail = () => {
     );
   }
 
-  if (!saree) {
+  if (!product) {
     return (
       <div className="text-center py-12">
         <p className="text-gray-600">Product not found</p>
@@ -128,13 +128,13 @@ const ProductDetail = () => {
           onClick={() => navigate('/shop')}
           className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition-colors"
         >
-          Browse Sarees
+          Browse Products
         </button>
       </div>
     );
   }
 
-  const sellingPrice = Math.round(saree.mrp - (saree.mrp * (saree.discountPercent || 0) / 100));
+  const sellingPrice = Math.round(product.mrp - (product.mrp * (product.discountPercent || 0) / 100));
 
   return (
     <div className="min-h-screen bg-gray-50 pb-20 sm:pb-4 relative">
@@ -155,8 +155,8 @@ const ProductDetail = () => {
               <FaTimes className="w-8 h-8" />
             </button>
             <img
-              src={saree.images?.image1 || 'https://via.placeholder.com/600x800?text=Image+Not+Available'}
-              alt={saree.title}
+              src={product.images?.image1 || 'https://via.placeholder.com/600x800?text=Image+Not+Available'}
+              alt={product.title}
               className="max-w-full max-h-[80vh] object-contain"
               onClick={(e) => e.stopPropagation()}
               onError={(e) => {
@@ -175,8 +175,8 @@ const ProductDetail = () => {
           <div className="w-full overflow-hidden rounded-xl bg-gray-50 group relative">
             <div className="relative pt-[100%] md:pt-[90%] overflow-hidden">
               <img
-                src={saree.images?.image1 || 'https://via.placeholder.com/600x800?text=Image+Not+Available'}
-                alt={saree.title}
+                src={product.images?.image1 || 'https://via.placeholder.com/600x800?text=Image+Not+Available'}
+                alt={product.title}
                 className="absolute top-0 left-0 w-full h-full object-contain cursor-zoom-in"
                 onClick={() => setIsImageModalOpen(true)}
                 onError={(e) => {
@@ -193,8 +193,8 @@ const ProductDetail = () => {
                     : 'bg-white text-black hover:bg-gray-50 border border-black') + ' rounded-full p-2 shadow cursor-pointer'}
                   onClick={(e) => {
                     e.stopPropagation();
-                    if (!saree) return;
-                    const pid = saree._id || id;
+                    if (!product) return;
+                    const pid = product._id || id;
                     const list = readWishlist();
                     const exists = list.some(p => (p._id || p.id) === pid);
                     if (exists) {
@@ -205,17 +205,17 @@ const ProductDetail = () => {
                     } else {
                       const item = {
                         _id: pid,
-                        title: saree.title,
-                        images: saree.images,
-                        price: Math.round(saree.mrp - (saree.mrp * (saree.discountPercent || 0) / 100)),
-                        mrp: saree.mrp,
-                        discountPercent: saree.discountPercent || 0,
+                        title: product.title,
+                        images: product.images,
+                        price: Math.round(product.mrp - (product.mrp * (product.discountPercent || 0) / 100)),
+                        mrp: product.mrp,
+                        discountPercent: product.discountPercent || 0,
                       };
                       const next = [item, ...list.filter((p) => (p._id || p.id) !== pid)];
                       writeWishlist(next);
                       setWishlisted(true);
                       try { window.dispatchEvent(new Event('wishlist:updated')); } catch {}
-                      alert(`${saree.title} added to wishlist`);
+                      alert(`${product.title} added to wishlist`);
                     }
                   }}
                   title={wishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
@@ -247,7 +247,7 @@ const ProductDetail = () => {
 
           {/* Product Details */}
           <div className="py-2 px-2">
-            <h1 className="text-2xl font-bold text-gray-800 mb-2">{saree.title}</h1>
+            <h1 className="text-2xl font-bold text-gray-800 mb-2">{product.title}</h1>
             
             <div className="flex items-center mb-4">
               <div className="flex text-yellow-400 mr-2">
@@ -266,11 +266,11 @@ const ProductDetail = () => {
                 </span>
               </div>
               <span className="text-gray-400 text-base line-through ml-4">
-                ₹{saree.mrp.toLocaleString()}
+                ₹{product.mrp.toLocaleString()}
               </span>
-              {saree.discountPercent > 0 && (
+              {product.discountPercent > 0 && (
                 <span className="bg-pink-100 text-pink-700 text-sm font-medium px-2.5 py-0.5 rounded ml-4">
-                  {saree.discountPercent}% OFF
+                  {product.discountPercent}% OFF
                 </span>
               )}
             </div>
@@ -278,7 +278,7 @@ const ProductDetail = () => {
             <div className="mb-6">
               <h3 className="text-base font-semibold text-gray-800 mb-2">Description</h3>
               <p className="text-gray-600 leading-relaxed mb-6">
-                {saree.description}
+                {product.description}
               </p>
 
               {/* Quantity Selector and Action Buttons */}
@@ -306,7 +306,7 @@ const ProductDetail = () => {
               <div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg p-2 z-50 sm:hidden">
                 <div className="flex gap-2 max-w-md mx-auto">
                   <button 
-                    className="flex-1 bg-white text-[#800020] py-2.5 rounded-lg flex items-center justify-center space-x-1.5 hover:bg-[#660019] hover:text-white transition-colors disabled:opacity-70 cursor-pointer shadow-sm border border-[#800020] text-sm"
+                    className="flex-1 bg-white text-[#02050B] py-2.5 rounded-lg flex items-center justify-center space-x-1.5 hover:bg-[#02050B] hover:text-white transition-colors disabled:opacity-70 cursor-pointer shadow-sm border border-[#02050B] text-sm"
                     onClick={handleAddToCart}
                     disabled={isAdding}
                   >
@@ -314,7 +314,7 @@ const ProductDetail = () => {
                     <span className="font-medium">{isAdding ? 'Adding...' : 'Add to Cart'}</span>
                   </button>
                   <button 
-                    className="flex-1 bg-[#800020] text-white py-2.5 rounded-lg flex items-center justify-center space-x-1.5 hover:bg-[#660019] transition-colors cursor-pointer shadow-sm border border-[#800020] text-sm"
+                    className="flex-1 bg-[#02050B] text-white py-2.5 rounded-lg flex items-center justify-center space-x-1.5 hover:bg-[#03070F] transition-colors cursor-pointer shadow-sm text-sm"
                     onClick={handleBuyNow}
                   >
                     <FaBolt className="h-4 w-4" />
@@ -326,7 +326,7 @@ const ProductDetail = () => {
               {/* Regular Buttons - Hidden on mobile */}
               <div className="hidden sm:flex flex-col sm:flex-row gap-3 mb-6">
                 <button 
-                  className="flex-1 bg-white text-[#800020] py-2.5 px-5 rounded-lg flex items-center justify-center space-x-2 hover:bg-[#660019] hover:text-white transition-colors disabled:opacity-70 cursor-pointer shadow-sm border border-[#800020]"
+                  className="flex-1 bg-white text-[#02050B] py-2.5 px-5 rounded-lg flex items-center justify-center space-x-2 hover:bg-[#02050B] hover:text-white transition-colors disabled:opacity-70 cursor-pointer shadow-sm border border-[#02050B]"
                   onClick={handleAddToCart}
                   disabled={isAdding}
                 >
@@ -334,7 +334,7 @@ const ProductDetail = () => {
                   <span className="font-medium">{isAdding ? 'Adding...' : 'Add to Cart'}</span>
                 </button>
                 <button 
-                  className="flex-1 bg-[#800020] text-white py-2.5 px-5 rounded-lg flex items-center justify-center space-x-2 hover:bg-[#660019] transition-colors cursor-pointer shadow-sm border border-[#800020]"
+                  className="flex-1 bg-[#02050B] text-white py-2.5 px-5 rounded-lg flex items-center justify-center space-x-2 hover:bg-[#03070F] transition-colors cursor-pointer shadow-sm"
                   onClick={handleBuyNow}
                 >
                   <FaBolt className="h-5 w-5" />
@@ -347,32 +347,36 @@ const ProductDetail = () => {
                 <div className="space-y-3 text-gray-700">
                   <div className="flex">
                     <span className="w-36 font-medium text-gray-600">Brand:</span>
-                    <span>{saree.product_info?.brand || 'N/A'}</span>
+                    <span>{product.product_info?.brand || 'N/A'}</span>
                   </div>
                   <div className="flex">
                     <span className="w-36 font-medium text-gray-600">Manufacturer:</span>
-                    <span>{saree.product_info?.manufacturer || 'N/A'}</span>
+                    <span>{product.product_info?.manufacturer || 'N/A'}</span>
                   </div>
                   <div className="flex">
                     <span className="w-36 font-medium text-gray-600">Category:</span>
-                    <span>{saree.category}</span>
+                    <span>{product.category}</span>
+                  </div>
+                  <div className="flex">
+                    <span className="w-36 font-medium text-gray-600">Scale:</span>
+                    <span>{product.product_info?.scale || 'N/A'}</span>
                   </div>
                   <div className="flex">
                     <span className="w-36 font-medium text-gray-600">Material:</span>
-                    <span>{saree.product_info?.SareeMaterial || 'N/A'}</span>
+                    <span>{product.product_info?.material || 'N/A'}</span>
                   </div>
                   <div className="flex">
                     <span className="w-36 font-medium text-gray-600">Color:</span>
-                    <span>{saree.product_info?.SareeColor || 'N/A'}</span>
+                    <span>{product.product_info?.color || 'N/A'}</span>
                   </div>
                   <div className="flex">
-                    <span className="w-36 font-medium text-gray-600">Length:</span>
-                    <span>{saree.product_info?.SareeLength || 'N/A'}</span>
+                    <span className="w-36 font-medium text-gray-600">Vehicle Type:</span>
+                    <span>{product.product_info?.vehicleType || 'N/A'}</span>
                   </div>
-                  {saree.product_info?.IncludedComponents && (
+                  {product.product_info?.dimensions && (
                     <div className="flex">
-                      <span className="w-36 font-medium text-gray-600">Included:</span>
-                      <span>{saree.product_info.IncludedComponents}</span>
+                      <span className="w-36 font-medium text-gray-600">Dimensions:</span>
+                      <span>{product.product_info.dimensions}</span>
                     </div>
                   )}
                 </div>

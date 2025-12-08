@@ -42,9 +42,9 @@ const Home = () => {
   // New Arrivals - Recommended image size: 800x500px to 1200x750px (aspect ratio 1.6:1)
   // Card image container heights: Mobile: 256px (h-64), Small: 288px (h-72), Medium+: 320px (h-80)
   const newArrivals = [
-    { image: 'https://res.cloudinary.com/duc9svg7w/image/upload/v1765174818/unnamed_dvdll4.jpg', name: 'Razor X-900 SuperSport (for bike)', price: '₹899' },
-    { image: 'https://res.cloudinary.com/duc9svg7w/image/upload/v1765121875/unnamed_oijrw8.jpg', name: 'Prestige Royale X (for luxury car)', price: '₹1,299' },
-    { image: 'https://res.cloudinary.com/duc9svg7w/image/upload/v1765175919/unnamed_xyvgk6.jpg', name: 'MegaMover Transporter (for truck)', price: '₹999' },
+    { image: 'https://res.cloudinary.com/duc9svg7w/image/upload/v1765174818/unnamed_dvdll4.jpg', name: 'Razor X-900 SuperSport ', price: '₹899' },
+    { image: 'https://res.cloudinary.com/duc9svg7w/image/upload/v1765121875/unnamed_oijrw8.jpg', name: 'Prestige Royale X ', price: '₹1,299' },
+    { image: 'https://res.cloudinary.com/duc9svg7w/image/upload/v1765175919/unnamed_xyvgk6.jpg', name: 'MegaMover Transporter ', price: '₹999' },
   ];
 
   const categories = [
@@ -182,7 +182,7 @@ const Home = () => {
                 <div className="text-xl sm:text-2xl md:text-3xl font-bold mb-1">OFF</div>
                 <div className="text-sm sm:text-base mb-2 font-semibold opacity-95">Limited Stock</div>
                 <p className="text-xs sm:text-sm opacity-90 mb-2">Grab your favorite toy cars before they run out!</p>
-                <button className="mt-2 bg-white text-pink-700 px-4 py-1.5 rounded-lg text-sm font-bold hover:bg-pink-50 transition-all duration-300 transform group-hover:scale-105">
+                <button className="mt-2 bg-white text-[#02050B] px-4 py-1.5 rounded-lg text-sm font-bold hover:bg-[#02050B] hover:text-white transition-all duration-300 transform group-hover:scale-105">
                   Shop Now →
                 </button>
               </div>
@@ -211,7 +211,7 @@ const Home = () => {
                 <div className="text-xl sm:text-2xl md:text-3xl font-bold mb-1">Collection</div>
                 <div className="text-sm sm:text-base mb-2 font-semibold opacity-95">RC Monster Trucks</div>
                 <p className="text-xs sm:text-sm opacity-90 mb-2">Explore our latest remote control vehicles!</p>
-                <button className="mt-2 bg-white text-blue-700 px-4 py-1.5 rounded-lg text-sm font-bold hover:bg-blue-50 transition-all duration-300 transform group-hover:scale-105">
+                <button className="mt-2 bg-white text-[#02050B] px-4 py-1.5 rounded-lg text-sm font-bold hover:bg-[#02050B] hover:text-white transition-all duration-300 transform group-hover:scale-105">
                   Explore →
                 </button>
               </div>
@@ -240,7 +240,7 @@ const Home = () => {
                 <div className="text-xl sm:text-2xl md:text-3xl font-bold mb-1">Shipping</div>
                 <div className="text-sm sm:text-base mb-2 font-semibold opacity-95">On Orders Above ₹999</div>
                 <p className="text-xs sm:text-sm opacity-90 mb-2">Shop more and save on delivery charges!</p>
-                <button className="mt-2 bg-white text-teal-700 px-4 py-1.5 rounded-lg text-sm font-bold hover:bg-teal-50 transition-all duration-300 transform group-hover:scale-105">
+                <button className="mt-2 bg-white text-[#02050B] px-4 py-1.5 rounded-lg text-sm font-bold hover:bg-[#02050B] hover:text-white transition-all duration-300 transform group-hover:scale-105">
                   Shop Now →
                 </button>
               </div>
@@ -288,7 +288,7 @@ const Home = () => {
             </h2>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-2 sm:gap-3 md:gap-4 lg:gap-5 px-2 sm:px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 md:gap-4 lg:gap-5 px-2 sm:px-4">
             {newArrivals.map((item, index) => (
               <div
                 key={index}
@@ -317,9 +317,9 @@ const Home = () => {
               </div>
             ))}
             
-            {/* Mobile Only Card */}
-            <div className="md:hidden group overflow-hidden rounded-lg bg-white shadow-sm hover:shadow-xl transition-all duration-300">
-              <div className="relative w-full h-64 bg-gray-100 overflow-hidden">
+            {/* Additional Card - Visible on all screens */}
+            <div className="group overflow-hidden rounded-lg bg-white shadow-sm hover:shadow-xl transition-all duration-300">
+              <div className="relative w-full h-64 sm:h-72 md:h-80 bg-gray-100 overflow-hidden">
                 <img
                   src="https://res.cloudinary.com/duc9svg7w/image/upload/v1765176793/unnamed_q2tbba.jpg"
                   alt="New Arrival"
@@ -331,11 +331,11 @@ const Home = () => {
                   }}
                 />
               </div>
-              <div className="p-4 bg-white">
-                <h3 className="text-gray-900 font-semibold text-base mb-2 text-center">
+              <div className="p-4 sm:p-5 md:p-6 bg-white">
+                <h3 className="text-gray-900 font-semibold text-base sm:text-lg md:text-xl mb-2 text-center">
                   Premium Tractor Model
                 </h3>
-                <p className="text-gray-600 font-bold text-lg text-center">
+                <p className="text-gray-600 font-bold text-lg sm:text-xl md:text-2xl text-center">
                   ₹1,199
                 </p>
               </div>

@@ -519,7 +519,7 @@ export default function FlipkartAccountSettings() {
                       </div>
                       <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">No Orders Yet</h3>
                       <p className="text-gray-600 text-sm sm:text-base mb-6">You haven't placed any orders yet. Start shopping now!</p>
-                      <button onClick={() => navigate('/shop')} className="px-6 sm:px-8 py-3 bg-gradient-to-r from-[#800020] to-[#a0002a] text-white rounded-xl font-medium hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                      <button onClick={() => navigate('/shop')} className="px-6 sm:px-8 py-3 bg-[#02050B] hover:bg-[#03070F] text-white rounded-xl font-medium hover:shadow-lg transition-all duration-300 transform hover:scale-105">
                         Start Shopping
                       </button>
                     </div>

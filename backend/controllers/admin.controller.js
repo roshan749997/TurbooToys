@@ -28,10 +28,11 @@ export async function createProduct(req, res) {
       product_info: {
         brand: product_info.brand || '',
         manufacturer: product_info.manufacturer || '',
-        SareeLength: product_info.SareeLength || '',
-        SareeMaterial: product_info.SareeMaterial || '',
-        SareeColor: product_info.SareeColor || '',
-        IncludedComponents: product_info.IncludedComponents || '',
+        scale: product_info.scale || '',
+        material: product_info.material || '',
+        color: product_info.color || '',
+        vehicleType: product_info.vehicleType || '',
+        dimensions: product_info.dimensions || '',
       },
       images: {
         image1: images.image1,

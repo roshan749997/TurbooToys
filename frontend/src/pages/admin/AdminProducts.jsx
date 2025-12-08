@@ -10,7 +10,7 @@ const AdminProducts = () => {
     description: '',
     category: '',
     images: { image1: '' },
-    product_info: { brand: '', manufacturer: '', SareeLength: '', SareeMaterial: '', SareeColor: '', IncludedComponents: '' },
+    product_info: { brand: '', manufacturer: '', scale: '', material: '', color: '', vehicleType: '', dimensions: '' },
   });
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
@@ -68,7 +68,7 @@ const AdminProducts = () => {
       };
       await api.admin.createProduct(payload);
       setToast({ show: true, text: 'Product created', type: 'success' });
-      setForm({ title: '', mrp: '', discountPercent: 0, description: '', category: '', images: { image1: '' }, product_info: { brand: '', manufacturer: '', SareeLength: '', SareeMaterial: '', SareeColor: '', IncludedComponents: '' } });
+      setForm({ title: '', mrp: '', discountPercent: 0, description: '', category: '', images: { image1: '' }, product_info: { brand: '', manufacturer: '', scale: '', material: '', color: '', vehicleType: '', dimensions: '' } });
       await load();
     } catch (e2) {
       setError(e2.message || 'Failed to create product');
@@ -182,15 +182,16 @@ const AdminProducts = () => {
             <div className="grid grid-cols-1 gap-2">
               <input value={form.images.image1} onChange={onChangeNested('images','image1')} placeholder="Image URL" className="w-full border rounded px-3 py-2" required />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-              <input value={form.product_info.brand} onChange={onChangeNested('product_info','brand')} placeholder="Brand" className="w-full border rounded px-3 py-2" />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+              <input value={form.product_info.brand} onChange={onChangeNested('product_info','brand')} placeholder="Brand (e.g., Hot Wheels)" className="w-full border rounded px-3 py-2" />
               <input value={form.product_info.manufacturer} onChange={onChangeNested('product_info','manufacturer')} placeholder="Manufacturer" className="w-full border rounded px-3 py-2" />
-              <input value={form.product_info.SareeMaterial} onChange={onChangeNested('product_info','SareeMaterial')} placeholder="Material" className="w-full border rounded px-3 py-2" />
-              <input value={form.product_info.SareeColor} onChange={onChangeNested('product_info','SareeColor')} placeholder="Color" className="w-full border rounded px-3 py-2" />
-              <input value={form.product_info.SareeLength} onChange={onChangeNested('product_info','SareeLength')} placeholder="Length" className="w-full border rounded px-3 py-2" />
-              <input value={form.product_info.IncludedComponents} onChange={onChangeNested('product_info','IncludedComponents')} placeholder="Included" className="w-full border rounded px-3 py-2" />
+              <input value={form.product_info.scale} onChange={onChangeNested('product_info','scale')} placeholder="Scale (e.g., 1:64)" className="w-full border rounded px-3 py-2" />
+              <input value={form.product_info.material} onChange={onChangeNested('product_info','material')} placeholder="Material (e.g., Die-cast)" className="w-full border rounded px-3 py-2" />
+              <input value={form.product_info.color} onChange={onChangeNested('product_info','color')} placeholder="Color" className="w-full border rounded px-3 py-2" />
+              <input value={form.product_info.vehicleType} onChange={onChangeNested('product_info','vehicleType')} placeholder="Vehicle Type (e.g., Car, SUV)" className="w-full border rounded px-3 py-2" />
+              <input value={form.product_info.dimensions} onChange={onChangeNested('product_info','dimensions')} placeholder="Dimensions (L x W x H)" className="w-full border rounded px-3 py-2" />
             </div>
-            <button type="submit" disabled={saving} className="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded">{saving ? 'Saving...' : 'Create Product'}</button>
+            <button type="submit" disabled={saving} className="px-4 py-2 bg-[#02050B] hover:bg-[#03070F] text-white rounded">{saving ? 'Saving...' : 'Create Product'}</button>
           </form>
         </div>
 
@@ -226,8 +227,8 @@ const AdminProducts = () => {
                           <span className="px-2 py-0.5 rounded-full text-xs bg-emerald-50 text-emerald-700 border border-emerald-200">{p.discountPercent || 0}% off</span>
                         </div>
                         <div className="mt-2 flex gap-2">
-                          <button onClick={() => openEditModal(p)} className="px-2 py-1 text-rose-700 border border-rose-200 rounded">Edit</button>
-                          <button onClick={() => remove(p._id)} className="px-2 py-1 text-white bg-rose-600 rounded">Delete</button>
+                          <button onClick={() => openEditModal(p)} className="px-2 py-1 text-[#02050B] border border-[#02050B] rounded hover:bg-[#02050B] hover:text-white">Edit</button>
+                          <button onClick={() => remove(p._id)} className="px-2 py-1 text-white bg-[#02050B] hover:bg-[#03070F] rounded">Delete</button>
                         </div>
                       </div>
                     </div>
@@ -257,14 +258,14 @@ const AdminProducts = () => {
                           <div className="flex flex-wrap items-center gap-2">
                             <button
                               onClick={() => openEditModal(p)}
-                              className="p-1.5 text-rose-600 hover:bg-rose-50 rounded-full"
+                              className="p-1.5 text-[#02050B] hover:bg-[#02050B]/10 rounded-full"
                               title="Edit"
                             >
                               <FiEdit className="w-4 h-4" />
                             </button>
                             <button
                               onClick={() => remove(p._id)}
-                              className="p-1.5 text-rose-700 hover:bg-rose-50 rounded-full"
+                              className="p-1.5 text-[#02050B] hover:bg-[#02050B]/10 rounded-full"
                               title="Delete"
                             >
                               <FiTrash2 className="w-4 h-4" />

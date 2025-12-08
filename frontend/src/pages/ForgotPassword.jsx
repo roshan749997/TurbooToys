@@ -67,7 +67,7 @@ const ForgotPassword = () => {
                 )}
                 <Link
                   to="/signin"
-                  className="inline-block w-full bg-gradient-to-r from-rose-500 to-rose-600 text-white py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 text-center"
+                  className="inline-block w-full bg-[#02050B] hover:bg-[#03070F] text-white py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 text-center"
                 >
                   Back to Sign In
                 </Link>
@@ -150,7 +150,7 @@ const ForgotPassword = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-gradient-to-r from-rose-500 to-rose-600 text-white py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 disabled:opacity-60"
+                  className="w-full bg-[#02050B] hover:bg-[#03070F] text-white py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 disabled:opacity-60"
                 >
                   {loading ? 'Sending...' : 'Send Reset Link'}
                 </button>

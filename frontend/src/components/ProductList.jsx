@@ -220,7 +220,7 @@ const ProductList = ({ defaultCategory } = {}) => {
         {activeFilterCount > 0 && (
           <button 
             onClick={resetFilters}
-            className="text-sm text-pink-600 hover:text-pink-700 font-medium"
+            className="text-sm text-[#02050B] hover:text-[#03070F] font-medium"
           >
             Clear all
           </button>

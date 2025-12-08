@@ -303,7 +303,7 @@ const SignIn = () => {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full bg-gradient-to-r from-rose-500 to-rose-600 text-white py-2 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 disabled:opacity-60"
+                    className="w-full bg-[#02050B] hover:bg-[#03070F] text-white py-2 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 disabled:opacity-60"
                   >
                     {loading ? 'Signing In...' : 'Sign In'}
                   </button>
@@ -344,7 +344,7 @@ const SignIn = () => {
                   <button
                     type="submit"
                     disabled={loading || mobile.length !== 10}
-                    className="w-full bg-gradient-to-r from-rose-500 to-rose-600 text-white py-2 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 disabled:opacity-60"
+                    className="w-full bg-[#02050B] hover:bg-[#03070F] text-white py-2 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 disabled:opacity-60"
                   >
                     {loading ? 'Sending OTP...' : 'Send OTP'}
                   </button>
@@ -415,7 +415,7 @@ const SignIn = () => {
                   <button
                     type="submit"
                     disabled={loading || otp.length !== 6}
-                    className="w-full bg-gradient-to-r from-rose-500 to-rose-600 text-white py-2 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 disabled:opacity-60"
+                    className="w-full bg-[#02050B] hover:bg-[#03070F] text-white py-2 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 disabled:opacity-60"
                   >
                     {loading ? 'Verifying...' : 'Verify OTP'}
                   </button>

@@ -67,12 +67,12 @@ const AdminDashboard = () => {
       <div className="flex items-center justify-between mb-4 sm:mb-6">
         <h1 className="text-2xl font-bold">Welcome, Admin!</h1>
         <div className="hidden sm:flex gap-2">
-          <Link to="/admin/products" className="px-3 py-2 bg-rose-600 text-white rounded">Manage Products</Link>
+          <Link to="/admin/products" className="px-3 py-2 bg-[#02050B] hover:bg-[#03070F] text-white rounded">Manage Products</Link>
           <Link to="/admin/orders" className="px-3 py-2 bg-amber-500 text-white rounded">View Orders</Link>
         </div>
       </div>
       <div className="sm:hidden grid grid-cols-2 gap-2 mb-4">
-        <Link to="/admin/products" className="text-center px-3 py-2 bg-rose-600 text-white rounded">Products</Link>
+        <Link to="/admin/products" className="text-center px-3 py-2 bg-[#02050B] hover:bg-[#03070F] text-white rounded">Products</Link>
         <Link to="/admin/orders" className="text-center px-3 py-2 bg-amber-500 text-white rounded">Orders</Link>
       </div>
       {loading ? (

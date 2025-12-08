@@ -14,18 +14,17 @@ const productSchema = new mongoose.Schema(
     },
 
     product_info: {
-      brand: { type: String },
-      manufacturer: { type: String },
-      SareeLength: { type: String },
-      SareeMaterial: { type: String },
-      SareeColor: { type: String },
-      IncludedComponents: { type: String },
+      brand: { type: String },                    // Brand name (e.g., Hot Wheels, Matchbox)
+      manufacturer: { type: String },             // Manufacturer name
+      scale: { type: String },                    // Scale size (e.g., 1:64, 1:24, 1:18)
+      material: { type: String },                 // Material (e.g., Die-cast, Plastic)
+      color: { type: String },                    // Vehicle color
+      vehicleType: { type: String },              // Vehicle type (e.g., Car, SUV, Truck, Bike)
+      dimensions: { type: String },               // Dimensions (Length x Width x Height)
     },
 
     images: {
       image1: { type: String, required: true },
-      image2: { type: String },
-      image3: { type: String },
     },
   },
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }

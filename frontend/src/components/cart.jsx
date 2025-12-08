@@ -32,7 +32,7 @@ function Cart() {
     <div className="container mx-auto px-4 py-8 max-w-6xl">
       <button 
         onClick={() => navigate('/collections')}
-        className="flex items-center text-[#800020] hover:text-[#660019] mb-6 transition-colors cursor-pointer border border-[#800020] rounded-md px-4 py-2 hover:bg-[#800020] hover:text-white"
+        className="flex items-center text-[#02050B] hover:text-white mb-6 transition-colors cursor-pointer border border-[#02050B] rounded-md px-4 py-2 hover:bg-[#02050B]"
       >
         <FaArrowLeft className="mr-2" /> Continue Shopping
       </button>
@@ -46,7 +46,7 @@ function Cart() {
           <p className="text-gray-500 mb-6">Looks like you haven't added anything to your cart yet.</p>
           <button 
             onClick={() => navigate('/collections')}
-            className="bg-[#800020] text-white px-6 py-2 rounded-md hover:bg-[#660019] transition-colors cursor-pointer"
+            className="bg-[#02050B] text-white px-6 py-2 rounded-md hover:bg-[#03070F] transition-colors cursor-pointer"
           >
             Continue Shopping
           </button>
@@ -137,14 +137,14 @@ function Cart() {
               
               <button 
                 onClick={() => navigate('/checkout/address')}
-                className="w-full bg-[#800020] text-white py-3 px-4 rounded-md hover:bg-[#660019] transition-colors font-medium cursor-pointer"
+                className="w-full bg-[#02050B] text-white py-3 px-4 rounded-md hover:bg-[#03070F] transition-colors font-medium cursor-pointer"
               >
                 Proceed to Checkout
               </button>
               
               <button 
                 onClick={clearCart}
-                className="w-full mt-3 text-[#800020] border border-[#800020] py-2 px-4 rounded-md hover:bg-[#800020] hover:text-white transition-colors text-sm font-medium cursor-pointer"
+                className="w-full mt-3 text-[#02050B] border border-[#02050B] py-2 px-4 rounded-md hover:bg-[#02050B] hover:text-white transition-colors text-sm font-medium cursor-pointer"
               >
                 Clear Cart
               </button>

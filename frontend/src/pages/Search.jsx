@@ -197,7 +197,7 @@ const Search = () => {
         {activeFilterCount > 0 && (
           <button 
             onClick={resetFilters}
-            className="text-sm text-pink-600 hover:text-pink-700 font-medium"
+            className="text-sm text-[#02050B] hover:text-[#03070F] font-medium"
           >
             Clear all
           </button>
@@ -451,7 +451,7 @@ const Search = () => {
             <div className="sticky bottom-0 bg-white border-t border-gray-200 px-6 py-4">
               <button
                 onClick={() => setShowMobileFilters(false)}
-                className="w-full bg-pink-600 text-white py-2 px-4 rounded-md hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+                className="w-full bg-[#02050B] text-white py-2 px-4 rounded-md hover:bg-[#03070F] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#02050B]"
               >
                 Apply Filters
               </button>

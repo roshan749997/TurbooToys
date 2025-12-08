@@ -132,8 +132,8 @@ const AdminOrders = () => {
                     onClick={() => setStatus(tab.value)}
                     className={`px-3 py-1.5 rounded-full text-sm border transition-colors ${
                       status === tab.value
-                        ? 'bg-rose-600 text-white border-rose-600'
-                        : 'bg-white text-gray-700 border-gray-200 hover:bg-rose-50'
+                        ? 'bg-[#02050B] text-white border-[#02050B]'
+                        : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
                     }`}
                   >
                     {tab.label}
@@ -192,7 +192,7 @@ const AdminOrders = () => {
                   <button
                     onClick={()=>saveStatus(o._id)}
                     disabled={updatingId===o._id || String(getTemp(o._id, o.status))===String(o.status)}
-                    className={`px-3 py-1 rounded text-white text-sm ${updatingId===o._id ? 'bg-gray-400' : 'bg-rose-600 hover:bg-rose-700'} disabled:opacity-60`}
+                    className={`px-3 py-1 rounded text-white text-sm ${updatingId===o._id ? 'bg-gray-400' : 'bg-[#02050B] hover:bg-[#03070F]'} disabled:opacity-60`}
                   >
                     {updatingId===o._id ? 'Saving...' : 'Save Changes'}
                   </button>

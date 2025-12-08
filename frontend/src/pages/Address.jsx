@@ -361,7 +361,7 @@ export default function AddressForm() {
                   {formData.landmark && <div className="text-sm text-gray-700">Landmark: {formData.landmark}</div>}
                   {formData.alternatePhone && <div className="text-sm text-gray-700">Alt: {formData.alternatePhone}</div>}
                   <div className="mt-4 flex gap-3">
-                    <button type="button" onClick={() => setEditMode(true)} className="px-4 py-2 border rounded text-blue-600 border-blue-600 hover:bg-blue-50 cursor-pointer">Edit Address</button>
+                    <button type="button" onClick={() => setEditMode(true)} className="px-4 py-2 border rounded text-[#02050B] border-[#02050B] hover:bg-[#02050B] hover:text-white cursor-pointer">Edit Address</button>
                     <button 
                       type="button" 
                       onClick={async () => {
@@ -390,7 +390,7 @@ export default function AddressForm() {
                           }
                         }
                       }}
-                      className="px-4 py-2 border rounded text-red-600 border-red-600 hover:bg-red-50 cursor-pointer"
+                      className="px-4 py-2 border rounded text-[#02050B] border-[#02050B] hover:bg-[#02050B] hover:text-white cursor-pointer"
                     >
                       Delete Address
                     </button>
@@ -401,7 +401,7 @@ export default function AddressForm() {
               <button
                 type="button"
                 onClick={handleUseCurrentLocation}
-                className="mb-6 bg-blue-600 text-white px-4 py-2 rounded flex items-center gap-2 hover:bg-blue-700 transition cursor-pointer"
+                className="mb-6 bg-[#02050B] text-white px-4 py-2 rounded flex items-center gap-2 hover:bg-[#03070F] transition cursor-pointer"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
@@ -594,13 +594,13 @@ export default function AddressForm() {
                 <button
                   type="submit"
                   disabled={saving}
-                  className={`bg-[#800020] hover:bg-[#660019] text-white px-8 py-3 rounded font-medium transition-colors cursor-pointer w-full sm:w-auto text-center ${saving ? 'opacity-70' : ''}`}
+                  className={`bg-[#02050B] hover:bg-[#03070F] text-white px-8 py-3 rounded font-medium transition-colors cursor-pointer w-full sm:w-auto text-center ${saving ? 'opacity-70' : ''}`}
                 >
                   SAVE AND DELIVER HERE
                 </button>
                 <button
                   onClick={handleCancel}
-                  className="text-blue-600 hover:text-blue-700 px-6 py-3 rounded font-medium transition cursor-pointer w-full sm:w-auto text-center border border-blue-600 hover:bg-blue-50"
+                  className="text-[#02050B] hover:text-white px-6 py-3 rounded font-medium transition cursor-pointer w-full sm:w-auto text-center border border-[#02050B] hover:bg-[#02050B]"
                 >
                   CANCEL
                 </button>
@@ -693,7 +693,7 @@ export default function AddressForm() {
             <button 
               onClick={handlePayment}
               disabled={!hasSavedAddress}
-              className={`w-full mt-4 py-3 px-4 rounded-md transition-colors font-medium cursor-pointer ${hasSavedAddress ? 'bg-[#800020] text-white hover:bg-[#660019]' : 'bg-gray-300 text-gray-600 cursor-not-allowed'}`}
+              className={`w-full mt-4 py-3 px-4 rounded-md transition-colors font-medium cursor-pointer ${hasSavedAddress ? 'bg-[#02050B] text-white hover:bg-[#03070F]' : 'bg-gray-300 text-gray-600 cursor-not-allowed'}`}
             >
               PROCEED TO PAYMENT
             </button>
