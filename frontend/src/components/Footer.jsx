@@ -11,11 +11,14 @@ const Footer = () => {
   ];
 
   const categories = [
-    { name: 'SILK SAREES', path: '/category/silk' },
-    { name: 'COTTON SAREES', path: '/category/cotton' },
-    { name: 'DESIGNER SAREES', path: '/category/designer' },
-    { name: 'REGIONAL SAREES', path: '/category/regional' },
-    { name: 'BANARASI SAREES', path: '/category/banarasi' },
+    { name: 'HOME', path: '/' },
+    { name: 'CARS', path: '/category/cars' },
+    { name: 'SUVS', path: '/category/suvs' },
+    { name: 'SPORTS', path: '/category/sports' },
+    { name: 'TRUCKS', path: '/category/trucks' },
+    { name: 'BIKES', path: '/category/bikes' },
+    { name: 'ABOUT', path: '/about' },
+    { name: 'CONTACT', path: '/contact' },
   ];
 
   const customerService = [
@@ -75,7 +78,10 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-[#273142] text-white border-t border-gray-700">
+    <footer className="bg-gradient-to-r from-black via-gray-900 to-black text-white">
+      {/* Top accent bar - same as navbar */}
+      <div className="h-1 bg-gradient-to-r from-red-600 via-orange-500 to-red-600 w-full"></div>
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
@@ -84,7 +90,7 @@ const Footer = () => {
             {/* Logo/Brand */}
           <Link to="/" className="flex-shrink-0">
             <img 
-              src="https://res.cloudinary.com/duc9svg7w/image/upload/v1764596289/1764596075057_nq2sed-removebg-preview_tm0y6m.png" 
+              src="https://res.cloudinary.com/duc9svg7w/image/upload/v1765024049/Gemini_Generated_Image_6vzr4f6vzr4f6vzr-removebg-preview_soztso.png" 
               alt="TurbooToys Logo" 
               className="h-21 md:h-60 w-auto hover:scale-105 transition-transform duration-300 mb-6"
             />
@@ -204,6 +210,9 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      
+      {/* Bottom accent bar - same as navbar */}
+      <div className="h-1 bg-gradient-to-r from-red-600 via-orange-500 to-red-600 w-full"></div>
     </footer>
   );
 };

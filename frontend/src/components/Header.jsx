@@ -38,7 +38,7 @@ const Header = () => {
         { name: 'HEAVY-DUTY TRUCKS', path: '/category/trucks/heavy-duty-trucks' }
       ]
     },
-    { 
+    {
       name: 'BIKES', 
       path: '/category/bikes',
       subcategories: [
@@ -195,7 +195,7 @@ const Header = () => {
                 <Link
                   to={category.path}
                   onClick={() => {
-                    setActiveCategory(null);
+                      setActiveCategory(null);
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
                   className="px-4 py-2 text-sm font-medium transition-colors duration-200 whitespace-nowrap relative flex items-center text-gray-700 hover:text-rose-500 border-b-2 border-transparent hover:border-rose-500"
