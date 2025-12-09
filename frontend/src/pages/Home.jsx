@@ -57,7 +57,7 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-0 pb-16 sm:pb-20 md:pb-0 w-full overflow-x-hidden">
+    <div className="min-h-screen pt-0 pb-16 sm:pb-20 md:pb-0 w-full overflow-x-hidden" style={{ backgroundColor: '#FEF8DD' }}>
       {/* Hero Slider */}
       <HeroSlider
         slides={[
@@ -74,7 +74,7 @@ const Home = () => {
       />
 
       {/* Shop by Category */}
-      <section className="py-8 sm:py-10 md:py-12 lg:py-16 px-2 sm:px-4 md:px-6 lg:px-8 bg-white w-full">
+      <section className="py-8 sm:py-10 md:py-12 lg:py-16 px-2 sm:px-4 md:px-6 lg:px-8 w-full" style={{ backgroundColor: '#FEF8DD' }}>
         <div className="w-full">
           <div className="text-center mb-8 sm:mb-10 md:mb-12 px-2 sm:px-4">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-black mb-2 sm:mb-3 uppercase" style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: '2px', textShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
@@ -112,7 +112,7 @@ const Home = () => {
       </section>
 
       {/* Premium Toy Car Collection */}
-      <section className="py-6 sm:py-8 md:py-10 lg:py-12 px-1 sm:px-2 md:px-3 lg:px-4 bg-gradient-to-b from-gray-50 to-white w-full">
+      <section className="py-6 sm:py-8 md:py-10 lg:py-12 px-1 sm:px-2 md:px-3 lg:px-4 w-full" style={{ backgroundColor: '#FEF8DD' }}>
         <div className="w-full">
           <div className="text-center mb-6 sm:mb-8 md:mb-10 lg:mb-12 px-2 sm:px-4">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center mb-2 sm:mb-3 text-black overflow-hidden uppercase" style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: '2px', textShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
@@ -150,7 +150,7 @@ const Home = () => {
       </section>
 
       {/* Offer Zone */}
-      <section className="py-8 sm:py-10 md:py-12 lg:py-16 px-2 sm:px-4 md:px-6 lg:px-8 bg-gradient-to-b from-white via-gray-50 to-white w-full">
+      <section className="py-8 sm:py-10 md:py-12 lg:py-16 px-2 sm:px-4 md:px-6 lg:px-8 w-full" style={{ backgroundColor: '#FEF8DD' }}>
         <div className="w-full">
           <div className="text-center mb-8 sm:mb-10 md:mb-12 px-2 sm:px-4">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-black mb-2 sm:mb-3 uppercase" style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: '2px', textShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
@@ -280,7 +280,7 @@ const Home = () => {
       </section>
 
       {/* New Arrivals */}
-      <section className="py-8 sm:py-10 md:py-12 lg:py-16 px-2 sm:px-4 md:px-6 lg:px-8 bg-white w-full">
+      <section className="py-8 sm:py-10 md:py-12 lg:py-16 px-2 sm:px-4 md:px-6 lg:px-8 w-full" style={{ backgroundColor: '#FEF8DD' }}>
         <div className="w-full">
           <div className="text-center mb-8 sm:mb-10 md:mb-12 px-2 sm:px-4">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-black mb-2 sm:mb-3 uppercase" style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: '2px', textShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
@@ -344,8 +344,26 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Banner Section */}
+      <section className="py-6 sm:py-8 md:py-10 lg:py-12 w-full" style={{ backgroundColor: '#FEF8DD' }}>
+        <div className="w-full">
+          <div className="relative w-full overflow-hidden">
+            <img
+              src="https://res.cloudinary.com/duc9svg7w/image/upload/v1765260272/Untitled_2048_x_594_px_1_abpktn.svg"
+              alt="TurbooToys Banner"
+              className="w-full h-auto object-cover"
+              loading="lazy"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = 'https://via.placeholder.com/2048x594/1F2937/FFFFFF?text=Banner';
+              }}
+            />
+          </div>
+        </div>
+      </section>
+
       {/* Why Choose TurbooToys */}
-      <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-2 sm:px-4 md:px-6 lg:px-8 bg-gradient-to-b from-gray-50 via-white to-gray-50 w-full">
+      <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-2 sm:px-4 md:px-6 lg:px-8 w-full" style={{ backgroundColor: '#FEF8DD' }}>
         <div className="w-full">
           <div className="text-center mb-10 sm:mb-12 md:mb-16 px-2 sm:px-4">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-black mb-3 sm:mb-4 uppercase" style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: '2px', textShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>

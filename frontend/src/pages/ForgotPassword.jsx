@@ -95,13 +95,13 @@ const ForgotPassword = () => {
         <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-rose-100 via-pink-100 to-amber-100 items-center justify-center">
           <div className="text-center">
             <Link to="/" className="inline-block mb-8">
-                <h1 className="text-6xl font-serif font-bold bg-gradient-to-r from-pink-500 via-rose-500 to-amber-500 bg-clip-text text-transparent">
+              <h1 className="text-6xl font-serif font-bold bg-gradient-to-r from-pink-500 via-rose-500 to-amber-500 bg-clip-text text-transparent">
                   TurbooToys
-                </h1>
-              </Link>
-              <p className="text-xl text-gray-600 max-w-md mx-auto leading-relaxed">
+              </h1>
+            </Link>
+            <p className="text-xl text-gray-600 max-w-md mx-auto leading-relaxed">
                 Discover the excitement of premium toy cars. Your journey to collecting authentic Hot Wheels starts here.
-              </p>
+            </p>
           </div>
         </div>
 
