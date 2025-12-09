@@ -131,7 +131,7 @@ const Header = () => {
 
   return (
     <header className="md:hidden sticky top-16 md:top-20 z-40 border-t border-gray-200 shadow-sm" style={{ backgroundColor: '#FEF8DD' }}>
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-0">
         {/* Desktop Navigation - Hidden on all screens now */}
         <div className="hidden md:flex items-center justify-center space-x-8 py-3" ref={headerRef}>
           {categories.map((category) => (
@@ -141,6 +141,7 @@ const Header = () => {
                   activeCategory === category.name ? 'text-rose-500' : ''
                 }`}
                 onClick={() => handleClick(category.name)}
+                style={{ fontFamily: "'HK Modular', sans-serif" }}
               >
                 {category.name}
                 <svg
@@ -164,6 +165,7 @@ const Header = () => {
                       to={category.path}
                       className="block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-rose-500 border-b border-gray-100"
                       onClick={() => setActiveCategory(null)}
+                      style={{ fontFamily: "'HK Modular', sans-serif" }}
                     >
                       All {category.name}
                     </Link>
@@ -174,6 +176,7 @@ const Header = () => {
                           to={subcategory.path}
                           className="block px-4 py-2.5 text-sm text-gray-600 hover:bg-rose-50 hover:text-rose-500 transition-colors duration-150"
                           onClick={() => setActiveCategory(null)}
+                          style={{ fontFamily: "'HK Modular', sans-serif" }}
                         >
                           {subcategory.name}
                         </Link>
@@ -189,7 +192,7 @@ const Header = () => {
         {/* Mobile Navigation - Horizontal Scroll - Only Main Categories */}
         <div className="md:hidden -mx-4 relative z-50">
           {/* Main Categories - Direct Links, No Subcategories - Centered */}
-          <div className="flex justify-center items-center space-x-1 overflow-x-auto px-4 pt-3 pb-2 hide-scrollbar sticky top-16 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b border-gray-200" style={{ backgroundColor: '#FEF8DD' }}>
+          <div className="flex justify-center items-center space-x-1 overflow-x-auto px-4 pt-1 pb-0 hide-scrollbar sticky top-16 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b border-gray-200" style={{ backgroundColor: '#FEF8DD' }}>
             {mobileCategories.map((category) => (
               <div key={category.name} className="shrink-0">
                 <Link
@@ -198,7 +201,8 @@ const Header = () => {
                       setActiveCategory(null);
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
-                  className="px-4 py-2 text-sm font-medium transition-colors duration-200 whitespace-nowrap relative flex items-center text-gray-700 hover:text-rose-500 border-b-2 border-transparent hover:border-rose-500"
+                  className="px-2 py-0.5 text-xs font-medium transition-colors duration-200 whitespace-nowrap relative flex items-center text-gray-700 hover:text-rose-500 border-b-2 border-transparent hover:border-rose-500"
+                  style={{ fontFamily: "'HK Modular', sans-serif" }}
                 >
                   {category.name}
                 </Link>
