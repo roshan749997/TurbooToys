@@ -70,7 +70,7 @@ const Home = () => {
             alt: 'Hot Wheels & Toy Collection - TurbooToys',
           },
         ]}
-        mobileSrc="https://res.cloudinary.com/duc9svg7w/image/upload/v1765130178/Black_and_Blue_Modern_Geometric_Car_Dealer_Presentation_2048_x_594_px_1080_x_1080_px_xdxyyx.png"
+        mobileSrc="https://res.cloudinary.com/duc9svg7w/image/upload/v1765262156/Black_and_Blue_Modern_Geometric_Car_Dealer_Presentation_2048_x_594_px_1080_x_1080_px_1_afyvkk.png"
       />
 
       {/* Shop by Category */}
