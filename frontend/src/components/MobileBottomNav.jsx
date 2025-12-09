@@ -11,7 +11,7 @@ const HomeIcon = ({ isActive }) => (
       strokeWidth="2" 
       strokeLinecap="round" 
       strokeLinejoin="round"
-      fill={isActive ? 'rgba(2, 5, 11, 0.1)' : 'transparent'}
+      fill="none"
     />
   </svg>
 );
@@ -137,21 +137,21 @@ const MobileBottomNav = () => {
 
   return (
     <div 
-      className={`fixed bottom-0 left-0 right-0 shadow-lg border-t border-gray-200 md:hidden z-50 py-1 transition-transform duration-300 ${
+      className={`fixed bottom-0 left-0 right-0 shadow-lg border-t border-gray-200 md:hidden z-50 pt-1 pb-0.5 transition-transform duration-300 ${
         isFooterVisible ? 'translate-y-full' : 'translate-y-0'
       }`}
       style={{ backgroundColor: '#FEF8DD' }}
     >
-      <div className="flex justify-around items-center h-12">
+      <div className="flex justify-around items-center h-9">
         <a 
           href="/" 
           onClick={handleHomeClick}
           className={`flex flex-col items-center justify-center ${isActive('/') ? 'text-[#02050B]' : 'text-[#02050B]'} transition-all duration-300 flex-1 group`}
         >
-          <div className={`p-1 rounded-full ${isActive('/') ? 'bg-gray-100' : 'group-hover:bg-gray-100'} transition-all duration-300`}>
+          <div className={`p-0.5 rounded-full ${isActive('/') ? 'bg-gray-100' : 'group-hover:bg-gray-100'} transition-all duration-300`}>
             <HomeIcon isActive={isActive('/')} />
           </div>
-          <span className="text-[10px] mt-0.5">HOME</span>
+          <span className="text-[9px] mt-0">HOME</span>
         </a>
         
         <Link 
@@ -166,7 +166,7 @@ const MobileBottomNav = () => {
               </span>
             )}
           </div>
-          <span className="text-[10px] mt-0.5">WISHLIST</span>
+          <span className="text-[9px] mt-0">WISHLIST</span>
         </Link>
         
         <Link 
@@ -181,7 +181,7 @@ const MobileBottomNav = () => {
               </span>
             )}
           </div>
-          <span className="text-[10px] mt-0.5">CART</span>
+          <span className="text-[9px] mt-0">CART</span>
         </Link>
         
         <Link 
@@ -191,7 +191,7 @@ const MobileBottomNav = () => {
           <div className={`p-1 rounded-full ${isActive('/profile') ? 'bg-gray-100' : 'group-hover:bg-gray-100'} transition-all duration-300`}>
             <AccountIcon isActive={isActive('/profile')} />
           </div>
-          <span className="text-[10px] mt-0.5">ACCOUNT</span>
+          <span className="text-[9px] mt-0">ACCOUNT</span>
         </Link>
       </div>
     </div>
