@@ -192,7 +192,7 @@ const Header = () => {
         {/* Mobile Navigation - Horizontal Scroll - Only Main Categories */}
         <div className="md:hidden -mx-4 relative z-50">
           {/* Main Categories - Direct Links, No Subcategories - Centered */}
-          <div className="flex justify-center items-center space-x-1 overflow-x-auto px-4 pt-1 pb-0 hide-scrollbar sticky top-16 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b border-gray-200" style={{ backgroundColor: '#FEF8DD' }}>
+          <div className="flex justify-center items-center space-x-1 overflow-x-auto px-4 pt-2 pb-1.5 hide-scrollbar sticky top-16 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b border-gray-200" style={{ backgroundColor: '#FEF8DD' }}>
             {mobileCategories.map((category) => (
               <div key={category.name} className="shrink-0">
                 <Link
