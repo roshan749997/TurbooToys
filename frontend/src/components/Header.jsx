@@ -130,7 +130,7 @@ const Header = () => {
   };
 
   return (
-    <header className="md:hidden sticky top-16 md:top-20 z-40 bg-white border-t border-gray-200 shadow-sm">
+    <header className="md:hidden sticky top-16 md:top-20 z-40 border-t border-gray-200 shadow-sm" style={{ backgroundColor: '#FEF8DD' }}>
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Desktop Navigation - Hidden on all screens now */}
         <div className="hidden md:flex items-center justify-center space-x-8 py-3" ref={headerRef}>
@@ -189,7 +189,7 @@ const Header = () => {
         {/* Mobile Navigation - Horizontal Scroll - Only Main Categories */}
         <div className="md:hidden -mx-4 relative z-50">
           {/* Main Categories - Direct Links, No Subcategories - Centered */}
-          <div className="flex justify-center items-center space-x-1 overflow-x-auto px-4 pt-3 pb-2 hide-scrollbar sticky top-16 z-50 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b border-gray-200">
+          <div className="flex justify-center items-center space-x-1 overflow-x-auto px-4 pt-3 pb-2 hide-scrollbar sticky top-16 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b border-gray-200" style={{ backgroundColor: '#FEF8DD' }}>
             {mobileCategories.map((category) => (
               <div key={category.name} className="shrink-0">
                 <Link

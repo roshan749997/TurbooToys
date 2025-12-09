@@ -345,7 +345,7 @@ const Home = () => {
       </section>
 
       {/* Banner Section */}
-      <section className="py-6 sm:py-8 md:py-10 lg:py-12 w-full" style={{ backgroundColor: '#FEF8DD' }}>
+      <section className="hidden md:block py-6 sm:py-8 md:py-10 lg:py-12 w-full" style={{ backgroundColor: '#FEF8DD' }}>
         <div className="w-full">
           <div className="relative w-full overflow-hidden">
             <img
