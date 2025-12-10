@@ -1,9 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import MobileBottomNav from '../components/MobileBottomNav';
 import HeroSlider from '../components/HeroSlider';
 import { FaTruck, FaAward, FaShieldAlt, FaUndo } from 'react-icons/fa';
 
 const Home = () => {
+  const navigate = useNavigate();
+
   const carData = [
     { 
       image: 'https://res.cloudinary.com/duc9svg7w/image/upload/v1765122010/unnamed_caprdy.jpg',
@@ -48,13 +51,18 @@ const Home = () => {
   ];
 
   const categories = [
-    { name: 'Bikes', icon: '🚴‍♂️', image: 'https://res.cloudinary.com/duc9svg7w/image/upload/v1765174818/unnamed_dvdll4.jpg' },
-    { name: 'SUVs', icon: '🚙', image: 'https://res.cloudinary.com/duc9svg7w/image/upload/v1765174828/unnamed_fniyfi.jpg' },
-    { name: 'Monster Trucks', icon: '🚛', image: 'https://res.cloudinary.com/duc9svg7w/image/upload/v1765176679/unnamed_hbal20.jpg' },
-    { name: 'Tractors', icon: '🚜', image: 'https://res.cloudinary.com/duc9svg7w/image/upload/v1765176793/unnamed_q2tbba.jpg' },
-    { name: 'Sports Cars', icon: '🏎️', image: 'https://res.cloudinary.com/duc9svg7w/image/upload/v1765176903/unnamed_rbilen.jpg' },
-    { name: 'HotWheels', icon: '🔥', image: 'https://res.cloudinary.com/duc9svg7w/image/upload/v1765177088/Gemini_Generated_Image_o3flc8o3flc8o3fl_j3z6xs.png' },
+    { name: 'Bikes', icon: '🚴‍♂️', image: 'https://res.cloudinary.com/duc9svg7w/image/upload/v1765174818/unnamed_dvdll4.jpg', path: '/category/bikes' },
+    { name: 'SUVs', icon: '🚙', image: 'https://res.cloudinary.com/duc9svg7w/image/upload/v1765174828/unnamed_fniyfi.jpg', path: '/category/suvs' },
+    { name: 'Monster Trucks', icon: '🚛', image: 'https://res.cloudinary.com/duc9svg7w/image/upload/v1765176679/unnamed_hbal20.jpg', path: '/category/trucks' },
+    { name: 'Tractors', icon: '🚜', image: 'https://res.cloudinary.com/duc9svg7w/image/upload/v1765176793/unnamed_q2tbba.jpg', path: '/category/farm-vehicles/tractors' },
+    { name: 'Sports Cars', icon: '🏎️', image: 'https://res.cloudinary.com/duc9svg7w/image/upload/v1765176903/unnamed_rbilen.jpg', path: '/category/cars/sports-cars' },
+    { name: 'HotWheels', icon: '🔥', image: 'https://res.cloudinary.com/duc9svg7w/image/upload/v1765177088/Gemini_Generated_Image_o3flc8o3flc8o3fl_j3z6xs.png', path: '/category/cars' },
   ];
+
+  const handleCategoryClick = (path) => {
+    navigate(path);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <div className="min-h-screen pt-0 pb-16 sm:pb-20 md:pb-0 w-full overflow-x-hidden" style={{ backgroundColor: '#FEF8DD' }}>
@@ -87,6 +95,7 @@ const Home = () => {
               <div
                 key={index}
                 className="group cursor-pointer"
+                onClick={() => handleCategoryClick(category.path)}
               >
                 <div className="relative aspect-square bg-white rounded-lg sm:rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:scale-105">
                   <div className="absolute inset-0 bg-gray-100">
@@ -102,7 +111,7 @@ const Home = () => {
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
-                <h3 className="text-center mt-3 text-xs sm:text-sm md:text-base font-semibold text-gray-900">
+                <h3 className="text-center mt-3 text-xs sm:text-sm md:text-base font-semibold text-gray-900 group-hover:text-[#02050B] transition-colors duration-300">
                   {category.name}
                 </h3>
               </div>

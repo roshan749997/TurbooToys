@@ -151,7 +151,7 @@ const Navbar = () => {
     { name: 'HOME', path: '/', icon: '🏠' },
     { name: 'CARS', path: '/category/cars', icon: '🚗' },
     { name: 'SUVS', path: '/category/suvs', icon: '🚙' },
-    { name: 'SPORTS', path: '/category/sports', icon: '🏎️' },
+    { name: 'TRACTORS', path: '/category/tractors', icon: '🏎️' },
     { name: 'TRUCKS', path: '/category/trucks', icon: '🚛' },
     { name: 'BIKES', path: '/category/bikes', icon: '🏍️' },
     { name: 'ABOUT', path: '/about', icon: 'ℹ️' },
